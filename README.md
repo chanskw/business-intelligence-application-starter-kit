@@ -47,6 +47,7 @@ The following instructions explain how to [fork the project on GitHub](https://g
   5. If it is not already installed on your system, install [Node.js](http://nodejs.org/). Installing Node.js will also install the `npm` command.
 
   6. Open app.js file, and specify the API key here:
+  
      `var alchemyApiKey = { api_key: process.env.ALCHEMY_API_KEY || '<your api key>'};`
   
   7. Edit the `manifest.yml` file in the folder that contains your fork and replace `application-name` with a unique name for your copy of the application. The name that you specify determines the application's URL, such as `application-name.mybluemix.net`.
@@ -91,6 +92,7 @@ Follow the steps in the [previous section](#getting-started) and ensure that you
     ```
 
   2. Open app.js file, and specify the API key here:
+   
      `var alchemyApiKey = { api_key: process.env.ALCHEMY_API_KEY || '<your api key>'};`
   
   3. Create a `.env.js` file in the root directory of the project with the following content:
