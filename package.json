@@ -12,7 +12,7 @@
     "express": "^4.12.2",
     "helmet": "^0.14.0",
     "q": "^1.4.1",
-    "watson-developer-cloud": "https://github.com/watson-developer-cloud/node-sdk.git#dev"
+    "watson-developer-cloud": "^1.2.2"
   },
   "repository": {
     "type": "git",

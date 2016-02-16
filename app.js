@@ -27,9 +27,11 @@ var express = require('express'),
 require('./config/express')(app);
 
 var toneAnalyzer = watson.tone_analyzer({
+  isStreaming: false,
   username: '<username>',
   password: '<password>',
-  version: 'v2-experimental'
+  version_date: '2016-02-11',
+  version: 'v3-beta'
 });
 
 var alchemyApiKey = { api_key: process.env.ALCHEMY_API_KEY || '<your api key>'};
