@@ -104,7 +104,7 @@ Follow the steps in the [previous section](#getting-started) and ensure that you
         VCAP_SERVICES: JSON.stringify({
           tone_analyzer: [{
             credentials: {
-              url: 'https://gateway.watsonplatform.net/tone-analyzer-beta/api",
+              url: 'https://gateway.watsonplatform.net/tone-analyzer-beta/api',
               username: 'TONE ANALYZER USERNAME HERE',
               password: 'TONE ANALYZER PASSWORD HERE'
             }
