@@ -102,7 +102,7 @@ app.get('/api/keywords', function (req, res, next) {
           });
         }
         else {
-          console.log(JSON.stringify(doc, null, 4));
+          console.log(JSON.stringify(doc, null, 2));
         }
       });
 
@@ -197,8 +197,7 @@ app.get('/api/articles', function (req, res, next) {
     start: req.query.start,
     end: req.query.end,
     return: 'q.enriched.url.title,q.enriched.url.url,enriched.url.docSentiment.score',
-    'q.enriched.url.enrichedTitle.entities.entity':
-      '\|text=' + req.query.entity + ',type=company,relevance=>0.25\|',
+    'q.enriched.url.enrichedTitle.entities.entity': entityQuery(req.query.entity),
     'q.enriched.url.url': req.query.source
   };
 

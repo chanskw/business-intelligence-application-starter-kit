@@ -98,7 +98,7 @@ Follow the steps in the [previous section](#getting-started) and ensure that you
         VCAP_SERVICES: JSON.stringify({
           tone_analyzer: [{
             credentials: {
-              url: 'https://gateway.watsonplatform.net/tone-analyzer-beta/api",
+              url: 'https://gateway.watsonplatform.net/tone-analyzer-beta/api',
               username: 'TONE ANALYZER USERNAME HERE',
               password: 'TONE ANALYZER PASSWORD HERE'
             }
@@ -189,7 +189,7 @@ When troubleshooting your Bluemix app, the most useful source of information is 
 
 [cloud_foundry]: https://github.com/cloudfoundry/cli
 [sign_up]: https://console.ng.bluemix.net/registration/
-// [get-alchemyapi-key]: https://console.ng.bluemix.net/catalog/services/alchemyapi/
+[get-alchemyapi-key]: https://console.ng.bluemix.net/catalog/services/alchemyapi/
 [get-alchemyapi-key]: http://www.alchemyapi.com/api/register.html
 [tone-analyzer]: http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/tone-analyzer.html
 [alchemydata-news]: http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/alchemy-data-news.html
