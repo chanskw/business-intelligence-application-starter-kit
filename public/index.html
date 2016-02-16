@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Business Intelligence</title>
+  <link rel="shortcut icon" href="artifacts/images/favicon.ico">
+  <link rel="stylesheet" href="artifacts/main.css"></link>
+
+</head>
+
+<body>
+  <header class="header-container">
+    <h1 class="header-h1-title"><span class="header-title-pronounce">Business Intelligence</span></h1>
+
+
+    <div class="search-field" id="header-search-container" style="display:none;">
+      <input type="text" class="entity-input entity-input-details" id="details-entity-input" maxlength="50"></input>
+      <span></span>
+    </div>
+  </header>
+  <main class="main-container" id="body-main">
+    <div id="watson-loader-container" class="ask-watson-loader">
+        <div class="loader-holder">
+          <img src="artifacts/images/loader.svg" alt="Loading Icon">
+        </div>
+    </div>
+    <section style="display: none;" class="welcome-flex" id="welcome-section">
+      <div class="welcome-box">
+        <div class="message-welcome-container">
+          <label class="message-welcome" for="welcome-entity-input"><strong class="message-welcome-strong">Type in the name of your company</strong> to discover what topics people are talking about, and how they feel about those topics.</label>
+        </div>
+        <div class="welcome-search-field">
+          <input type="text" id="welcome-entity-input" class="entity-input entity-input-welcome" placeholder="company name" maxlength="50"></input>
+          <span></span>
+        </div>
+      </div>
+      <footer>
+        <div style="text-align: center;" class="footer-section">
+            <a href="http://www.ibm.com/WatsonDeveloperCloud" target="_blank">Build With IBM Watson</a>
+            |
+            <a href="">Terms & Conditions</a>
+            |
+            <a href="">Privacy</a>
+        </div>
+      </footer>
+    </section>
+    <section style="display: none;" id="details-section" class="details-section-container">
+      <header class="details-header-section" id="details-header">
+            <div>
+              <h2 id="details-entity-title" class="details-header-title"></h2>
+              <p id="entity-description"></p>
+            </div>
+            <div class="date-panel">
+              <label class="date-picker-label">Select a range of time you want to analyze.</label>
+
+              <div id="date-picker-container" class="date-container"></div>
+            </div>
+      </header>
+      <div class="details-section-body">
+        <div class="summary-row">
+          <article class="summary-row-first-item">
+            <h4 class="details-card-title">Customer Sentiment</h4>
+            <div class="customer-sentiment-desc-container">
+              <p class="details-card-description">Watson uses sentiment analysis to analyze how the customer feels about your company.</p>
+            </div>
+            <div id="customer-sentiment-container"></div>
+          </article>
+          <article class="summary-row-second-item">
+            <h4 class="details-card-title">Top Sources</h4>
+            <div class="sources-desc-container">
+              <p class="details-card-description">Watson uses AlchemyData News to find the top three sources that are talking about your company the most and Tone Analyzer to show you how they are talking about your company.</p>
+            </div>
+            <div id="top-sources-container"></div>
+          </article>
+        </div>
+        <article class="article-list-item">
+            <div id="article-list-container"></div>
+        </article>
+        <div class="topics-container">
+          <article>
+            <div>
+              <h4 class="details-card-title">Topics</h4>
+              <div id="topics-loading-container" style="display:none;">
+                <p>Loading topics...</p>
+              </div>
+              <div id="topics-details-container" >
+                <div class="topics-desc-container">
+                  <p class="details-card-description">Using Watson to analyze media, you can find the topics that matter most to customers and prospects. Additionally, you can expand the topic to see how people feel about that topic.</p>
+                </div>
+                <div>
+                  <div id="topic-chart-container"></div>
+                </div>
+                <div>
+                  <div id="topic-list-container"></div>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+  <script src="js/d3.min.js"></script>
+
+  <!--Add dependent scripts-->
+  <script src="js/app/widgetUtil.js"></script>
+  <script src="js/app/topicsTable.js"></script>
+  <script src="js/app/articleTable.js"></script>
+  <script src="js/app/topicsBallChart.js"></script>
+  <script src="js/app/sentimentLineChart.js"></script>
+  <script src="js/app/sentimentBalls.js"></script>
+  <script src="js/app/datePicker.js"></script>
+  <script src="js/app/watsonModel.js"></script>
+  <script src="js/app/mainController.js"></script>
+  <script src="js/app/topSourceBoxes.js"></script>
+
+  <!--Add main/boot scripts-->
+  <script src="js/properties.js"></script>
+  <script src="js/main.js"></script>
+
+</body>
+
+</html>

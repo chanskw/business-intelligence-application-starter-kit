@@ -1,0 +1,35 @@
+{
+  "name": "business-intelligence",
+  "version": "0.1.0",
+  "description": "A sample Node.js web application that highlights the use of Alchemy APIs",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "body-parser": "^1.13.2",
+    "express-rate-limit": "^2.0.2",
+    "express-secure-only": "^0.2.1",
+    "express": "^4.12.2",
+    "helmet": "^0.14.0",
+    "q": "^1.4.1",
+    "watson-developer-cloud": "https://github.com/watson-developer-cloud/node-sdk.git#dev"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/watson-developer-cloud/business-intelligence.git"
+  },
+  "engines": {
+    "node": ">=0.12.x"
+  },
+  "author": "IBM Corp.",
+  "contributors": [
+    {
+      "name": "Samantha Chan",
+      "email": "chanskw@ca.ibm.com"
+    },
+    {
+      "name": "Kalvin Misquith",
+      "email": "misquith@ca.ibm.com"
+    }
+  ]
+}

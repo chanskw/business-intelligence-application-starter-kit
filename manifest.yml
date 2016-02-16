@@ -1,0 +1,14 @@
+declared-services:
+  tone-analyzer-service:
+    label: tone_analyzer
+    plan: beta
+applications:
+- name: business-intelligence
+  command: npm start
+  path: .
+  memory: 1024M
+  services:
+  - tone-analyzer-service
+  env:
+    NODE_ENV: production
+    SECURE_EXPRESS: 1

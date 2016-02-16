@@ -1,0 +1,3 @@
+var globalProperties = {
+  serviceEndpoint: 'api'
+};

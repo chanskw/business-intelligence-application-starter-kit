@@ -1,0 +1,558 @@
+/*Fonts */
+@font-face {
+  font-family: "HelvBoldIBM";
+  font-style: normal;
+  font-weight: bold;
+  src: url("//1.www.s81c.com/common/fonts/hni-bold.eot?#iefix") format("embedded-opentype"), url("//1.www.s81c.com/common/fonts/hni-bold.woff") format("woff"), url("//1.www.s81c.com/common/fonts/hni-bold.ttf") format("truetype"), url("//1.www.s81c.com/common/fonts/hni-bold.svg#HelvBoldIBM") format("svg");
+}
+
+@font-face {
+ font-family: "HelvLightIBM";
+ font-style: normal;
+ src: url("//1.www.s81c.com/common/fonts/hni-light.eot?#iefix") format("embedded-opentype"), url("//1.www.s81c.com/common/fonts/hni-light.woff") format("woff"), url("//1.www.s81c.com/common/fonts/hni-light.ttf") format("truetype"), url("//1.www.s81c.com/common/fonts/hni-light.svg#HelvLightIBM") format("svg");
+}
+
+@font-face{
+ font-family:'HelvRegularIBM';
+ src:url("//1.www.s81c.com/common/fonts/hni.eot");src:url("//1.www.s81c.com/common/fonts/hni.eot?#iefix") format("embedded-opentype"),url("//1.www.s81c.com/common/fonts/hni.woff") format("woff"),url("//1.www.s81c.com/common/fonts/hni.ttf") format("truetype"),url("//1.www.s81c.com/common/fonts/hni.svg#HelvRegularIBM") format("svg");
+ font-weight:normal;
+ font-style:normal
+}
+
+
+
+ /*Main page */
+ html{
+   height: 100%;
+ }
+
+
+ body{
+   height: 100%;
+   margin: 0;
+   display: flex;
+   flex-direction: column;
+   font-family: HelvRegularIBM;
+   min-width: 960px;
+ }
+
+
+/*Header*/
+
+.header-container
+{
+  background-color: #4A418C;
+  color: white;
+  height: 70px;
+  position: fixed;
+  width: 100%;
+}
+
+.header-h1-title{
+  padding-left: 64px;
+  font-size: 1rem;
+  margin: 0;
+  float: left;
+  font-weight: normal;
+  line-height: 70px;
+  font-family: HelvBoldIBM;
+}
+
+.header-title-pronounce{
+  font-weight: bold;
+}
+
+
+
+/*Search field*/
+
+.entity-input-details{
+  height: 35px;
+  font-size: 24px;
+  font-family: HelvRegularIBM;
+}
+
+
+.search-field{
+  position: relative;
+  float:right;
+  margin-right: 118px;
+  padding-top: 10px;
+  border-bottom-style: solid;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 1px;
+  width: 288px;
+}
+
+.search-field input {
+  margin-left: 40px;
+  outline: none;
+}
+.search-field span {
+  background: url("images/search_icon_small.svg") no-repeat;
+  position: absolute;
+  top: 18px;
+  left: 10px;
+  width: 18px;
+  height: 18px;
+  background-size:contain;
+}
+
+/*Main page*/
+
+#entity-description{
+  float: right;
+  width: 288px;
+  font-family: HelvRegularIBM;
+  font-size: 16px;
+}
+
+.main-container{
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  margin-top: 70px;
+}
+
+
+/*Loader*/
+.ask-watson-loader{
+  position: fixed;
+  top: 70px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #F2F2F2;
+}
+
+.loader-holder{
+  margin: -90px 0 0 -60px;
+  top: 50%;
+  left: 50%;
+  position: absolute;
+}
+
+
+/*Welcome page*/
+
+.welcome-flex{
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  background-color: #6854BF;
+  color: #FFFFFF;
+}
+
+.welcome-box{
+  margin: 130px auto;
+  width: 800px;
+  flex: 1;
+}
+
+.message-welcome-container{
+  padding-bottom: 100px;
+}
+
+.message-welcome-strong{
+  font-family: HelvBoldIBM;
+}
+
+.message-welcome{
+  font-size: 24px;
+  font-family: HelvLightIBM;
+}
+
+.entity-input{
+  border-color: #FFFFFF;
+  border-top: 0px;
+  border-right: 0px;
+  border-left: 0px;
+  border-bottom: 0px;
+  background-color: transparent;
+  color: inherit;
+}
+
+.welcome-search-field{
+  position: relative;
+  border-color: #FFFFFF;
+  border-bottom: 1px solid;
+}
+
+
+.welcome-search-field ::-webkit-input-placeholder {
+   color: #B9B7F9;
+   font-family: HelvRegularIBM;
+}
+.welcome-search-field span {
+  background: url("images/search_icon_small.svg") no-repeat;
+  position: absolute;
+  top: 38px;
+  left: 10px;
+  width: 40px;
+  height: 40px;
+  background-size:contain;
+}
+
+.entity-input-welcome{
+  height: 100px;
+  font-size: 60px;
+  margin-left: 70px;
+  outline: none;
+  font-family: HelvRegularIBM;
+}
+
+/*Details page*/
+
+.details-section-container > *{
+  padding-left: 6%;
+  padding-right: 6%;
+}
+
+.details-header-section{
+  padding-top: 20px;
+  background-color: #6854BF;
+  color: white;
+}
+
+.details-header-title{
+  margin: 0;
+  font-weight: normal;
+  font-size: 60px;
+  display: inline;
+  font-family: HelvLightIBM;
+}
+
+
+.details-section-body{
+  background-color: white;
+  color: black;
+}
+
+.details-sticky-space{
+  margin-top: 210px;
+}
+
+.details-card-title{
+  border-bottom: medium solid black;
+  padding-bottom: 10px;
+  font-family: HelvBoldIBM;
+  font-size: 24px;
+}
+
+.details-card-description{
+  font-family: HelvLightIBM;
+  font-size: 18px;
+}
+
+
+/*Date picker*/
+
+.date-container{
+  padding-top: 10px;
+}
+
+.fixed-date-container{
+  background-color: #6854BF;
+  position: fixed;
+  top: 70px;
+  left: 0;
+  right: 0;
+  padding-left: 6%;
+  padding-right: 6%;
+}
+
+.date-panel{
+  padding-top: 25px;
+}
+
+.date-picker-label{
+  font-size: 20px;
+  font-family: HelvLightIBM;
+}
+
+.date-picker .axis path{
+  fill: none;
+  shape-rendering: crispEdges;
+}
+
+.date-picker .axis line {
+  stroke: #FFFFFF;
+}
+
+
+.date-picker .brush .extent {
+  shape-rendering: crispEdges;
+  fill: #FFFFFF;
+}
+
+.date-picker .brush .background {
+  visibility: visible !important;
+  fill: #4A418C;
+}
+
+.date-picker .resize {
+  display: inline !important; /* show when empty */
+  fill: #666;
+  fill-opacity: 1;
+  stroke: #000;
+  stroke-width: 1.5px;
+}
+
+.date-picker .axis text {
+	font-family: HelvBoldIBM;
+	font-size: 12px;
+  font-weight: bold;
+  fill: #FFFFFF;
+}
+
+.date-picker .days-postfix-text{
+  font-family: HelvLightIBM;
+  font-size: 10px;
+}
+
+.date-picker .arrow-handle{
+  fill: #FCEE6B;
+  stroke: transparent;
+}
+
+
+/*Summary row*/
+
+.summary-row{
+  display: flex;
+  flex-flow: row nowrap;
+}
+
+.summary-row > article{
+  flex: 1;
+}
+
+.summary-row-first-item{
+  margin-right: 50px;
+}
+
+.summary-row-second-item{
+  margin-left: 50px;
+}
+
+/*Widgets in detail summary*/
+.customer-sentiment-desc-container{
+  padding-bottom: 30px;
+}
+
+.sentiment-balls .sentiment-circle{
+  stroke: transparent;
+}
+
+.sentiment-balls .sentiment-percent{
+  font-family: HelvBoldIBM;
+}
+
+.sources-desc-container{
+  padding-bottom: 30px;
+}
+
+/*Top sources*/
+.top-sources .source-rect{
+  fill: transparent;
+  stroke: black;
+  stroke-width: 1px;
+}
+
+.top-sources .source-rect:hover{
+  cursor: pointer;
+}
+
+.top-sources .hover-rect,
+.top-sources .clicked-rect{
+  fill: #6854BF;
+}
+
+.top-sources .hover-text,
+.top-sources .clicked-text{
+  fill: #FFFFFF;
+}
+
+.top-sources .source-count {
+	font-family: HelvBoldIBM;
+	font-size: 14px;
+}
+.top-sources .source-count:hover{
+  cursor: pointer;
+}
+
+.top-sources .source-name{
+  font-family: HelvLightIBM;
+}
+
+/*Articles and tones*/
+
+.article-list-item{
+  padding-top: 30px;
+}
+
+.article-table{
+  margin-top: 20px;
+}
+
+.article-table .article-caption{
+ border-bottom: 1px solid;
+ font-family: HelvBoldIBM;
+}
+
+.article-table .article-cell{
+  text-align: left;
+ border-bottom: 1px solid;
+ padding-top: 20px;
+ padding-bottom: 20px;
+ font-family: HelvLightIBM;
+}
+
+/*Topics chart*/
+
+.topic-chart .ball-number{
+  font-size: 11px;
+  font-family: HelvBoldIBM;
+}
+
+.topic-chart .stick-text{
+  font-size: 8px;
+  font-family: HelvBoldIBM;
+}
+
+/*Keywords or topics table*/
+
+.topics-container{
+  display: flex;
+  flex-flow: column nowrap;
+  padding-top: 30px;
+}
+
+.topics-container > article{
+  flex: 1;
+}
+
+.topics-desc-container{
+  padding-bottom: 30px;
+}
+
+.keywords-table-container{
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.keywords-table-container .keyword-row{
+  text-align:left;
+  font-family: HelvBoldIBM;
+}
+
+
+.keywords-table-container > thead{
+  border-bottom: 1pt solid black;
+}
+
+.keywords-table-container > tbody{
+  border-bottom: 1pt solid black;
+}
+
+
+
+.keywords-table-container .keyword-heading{
+  font-weight: normal;
+  font-size: 16px;
+  padding-bottom: 10px;
+  text-align: left;
+  font-weight: HelvLightIBM;
+}
+
+.keywords-table-container .keyword-row > td{
+    cursor: pointer;
+}
+
+.keywords-table-container .data-column-entry{
+  padding: 15px;
+  font-size: 20px;
+}
+
+.keywords-table-container .sentiment-chart-container{
+  flex: 1 1 0%;
+  margin: 0px auto;
+  border-style: dotted;
+  border-width: 1px;
+  margin-bottom: 20px;
+}
+
+
+.keywords-table-container .sentiment-column-positive:before{
+  content: "\2b";
+  font-size: 40px;
+  color: #41D6BD;
+}
+
+.keywords-table-container .sentiment-column-negative:before{
+  content: "\2212";
+  font-size: 40px;
+  color: #FF7461;
+}
+
+.keywords-table-container .carrot{
+  background: url("images/chevron_arrow-01.svg") no-repeat;
+  margin-left: 10px;
+  width: 18px;
+  height: 18px;
+  background-size:contain;
+}
+
+.keywords-table-container .carrot-expanded{
+     transform: rotate(180deg);
+  }
+/*Sentiment time multi line chart  */
+.sentimentTimeLineChart .axis path,
+.sentimentTimeLineChart .axis line {
+  fill: none;
+  stroke: grey;
+  stroke-width: 1;
+  shape-rendering: crispEdges;
+}
+
+.sentimentTimeLineChart .line {
+  fill: none;
+  stroke: steelblue;
+  stroke-width: 1.5px;
+}
+.sentimentTimeLineChart .legend-text {
+  font-size: 10px;
+}
+
+.footer-section{
+  background-color: #6854BF;
+  color: #FFFFFF;
+  padding: 10px 0 10px 0;
+}
+
+.footer-section > a{
+  color: inherit;
+  text-decoration: none;
+  font-size: 0.8em;
+}
+
+@media only screen and (max-width: 960px){
+
+  .header-container{
+    position: relative;
+  }
+
+  .main-container{
+    margin-top: 0;
+  }
+
+  .fixed-date-container{
+    background-color: inherit;
+    position: inherit;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 0;
+  }
+
+}
