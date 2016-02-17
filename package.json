@@ -1,22 +1,23 @@
 {
   "name": "business-intelligence",
-  "version": "0.1.0",
-  "description": "A sample Node.js web application that highlights the use of Alchemy APIs",
+  "version": "0.3.0",
+  "description": "A sample Node.js web application that highlights the use of Alchemy APIs and Tone Analyzer",
   "scripts": {
     "start": "node app.js"
   },
   "dependencies": {
     "body-parser": "^1.13.2",
+    "compression": "^1.6.1",
+    "express": "^4.12.2",
     "express-rate-limit": "^2.0.2",
     "express-secure-only": "^0.2.1",
-    "express": "^4.12.2",
     "helmet": "^0.14.0",
     "q": "^1.4.1",
-    "watson-developer-cloud": "^1.2.2"
+    "watson-developer-cloud": "^1.2.3"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/watson-developer-cloud/business-intelligence.git"
+    "url": "https://github.com/watson-developer-cloud/business-intelligence-application-starter-kit.git"
   },
   "engines": {
     "node": ">=0.12.x"
@@ -31,5 +32,9 @@
       "name": "Kalvin Misquith",
       "email": "misquith@ca.ibm.com"
     }
-  ]
+  ],
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/watson-developer-cloud/business-intelligence-application-starter-kit/issues"
+  }
 }
