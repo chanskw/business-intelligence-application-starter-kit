@@ -485,8 +485,6 @@
 .keywords-table-container .sentiment-chart-container{
   flex: 1 1 0%;
   margin: 0px auto;
-  border-style: dotted;
-  border-width: 1px;
   margin-bottom: 20px;
 }
 
@@ -515,21 +513,87 @@
      transform: rotate(180deg);
   }
 /*Sentiment time multi line chart  */
+
+.sentimentTimeLineChart-tooltip{
+    position: absolute;
+    text-align: center;
+    padding-top: 10px;
+    width: 50px;
+    height: 28px;
+    color: white;
+    font-size: 12px;
+    font-family: HelvBoldIBM;
+
+    pointer-events: none;
+}
+
+.sentimentTimeLineChart-tooltip:after {
+  display: inline;
+  width: 100%;
+  line-height: 1;
+  content: "\25BC";
+  position: absolute;
+  text-align: center;
+  margin-top: -3px;
+  top: 100%;
+  left: 0;
+}
+
+.sentimentTimeLineChart-tooltip-positive{
+    background-color: #41D6BD;
+}
+
+.sentimentTimeLineChart-tooltip-positive:after{
+    color: #41D6BD;
+}
+
+.sentimentTimeLineChart-tooltip-negative{
+    background-color: #FF7461;
+}
+
+.sentimentTimeLineChart-tooltip-negative:after{
+    color: #FF7461;
+}
+
+
 .sentimentTimeLineChart .axis path,
 .sentimentTimeLineChart .axis line {
   fill: none;
   stroke: grey;
   stroke-width: 1;
-  shape-rendering: crispEdges;
+  shape-rendering: auto;
 }
 
 .sentimentTimeLineChart .line {
   fill: none;
-  stroke: steelblue;
-  stroke-width: 1.5px;
+  stroke-width: 2px;
 }
+
+.sentimentTimeLineChart .line-points {
+  fill: #FFFFFF;
+  stroke-width: 2px;
+}
+
+.sentimentTimeLineChart .positive {
+  stroke: #41D6BD;
+}
+
+.sentimentTimeLineChart .negative {
+  stroke: #FF7461;
+}
+
 .sentimentTimeLineChart .legend-text {
   font-size: 10px;
+}
+
+.sentimentTimeLineChart .axis{
+  font-family: HelvBoldIBM;
+  font-size: 14px;
+}
+
+.sentimentTimeLineChart .y-axis-label{
+  font-family: HelvLightIBM;
+  font-size: 14px;
 }
 
 .footer-section{
