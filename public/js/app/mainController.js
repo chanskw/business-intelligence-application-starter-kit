@@ -1,7 +1,5 @@
 (function(app) {
-
-
-
+  'use strict';
   app.MainController = function(model) {
     this.model = model;
     this.widgets = [];
@@ -17,7 +15,8 @@
     var datePickerContainer = document.getElementById('date-picker-container');
     var header = document.getElementById('details-header');
     var isFixed = false;
-    //TODO: Use scrollHeight to calculate the correct offsets. Need to recalculate when the page resizes
+    //TODO: Use scrollHeight to calculate the correct offsets.
+    // Need to recalculate when the page resizes
     var triggerPageOffset = 140;
     window.addEventListener('scroll', function() {
       var pageOffset = window.pageYOffset;
@@ -108,13 +107,14 @@
                 console.error(e);
               }
             } else {
-              alert('No data available for entity ' + this.model.entity);
+              window.alert('No data available for entity ' + this.model.entity);
             }
           }.bind(this))
           .catch(
             function(reason) {
               this._showLoader(false);
-              alert('Unable to retrieve answers from Watson. \n\n Status: ' + reason.status + ', Message: ' + reason.responseText);
+              window.alert('Unable to retrieve answers from Watson. \n\n Status: ' +
+                reason.status + ', Message: ' + reason.responseText);
             }.bind(this)
           );
       } else {
@@ -145,12 +145,12 @@
 
     entityInput.onkeypress = function(e) {
       //on enter
-      if (e.keyCode == 13) {
+      if (e.keyCode === 13) {
         var inputValue = entityInput.value;
         if (inputValue.trim().length) {
           callback(inputValue);
         } else {
-          alert('Please enter an entity name.');
+          window.alert('Please enter an entity name.');
         }
         return true;
       }
@@ -195,7 +195,7 @@
     detailsSection.style.display = doShowDetailsSection ? '' : 'none';
 
     //TODO: try to make this work with pure css
-    var bodyMain =  document.getElementById('body-main');
+    var bodyMain = document.getElementById('body-main');
     bodyMain.style.display = doShowDetailsSection ? 'block' : '';
   };
 
@@ -252,7 +252,8 @@
     var descriptionDiv = document.getElementById('entity-description');
     descriptionDiv.innerHTML = description ? description : '';
 
-    var topSourceBoxes = new app.TopSourceBoxes(this._createDummyContainer('top-sources-container'), this.model.data);
+    var topSourceBoxes = new app.TopSourceBoxes(
+      this._createDummyContainer('top-sources-container'), this.model.data);
     this.widgets.push(topSourceBoxes);
 
     var cachedSource = null;
@@ -269,19 +270,21 @@
           articleListContainer.innerHTML = 'Loading Articles...';
           this.model.fetchArticles(source).then(function() {
             articleListContainer.innerHTML = '';
-            this._articleTable = new app.ArticleTable(this._createDummyContainer('article-list-container'), {
-              model: this.model,
-              source: source
-            });
+            this._articleTable = new app.ArticleTable(
+              this._createDummyContainer('article-list-container'), {
+                model: this.model,
+                source: source
+              });
           }.bind(this)).catch(function(error) {
-            alert('An error occurred while fetching articles');
+            window.alert('An error occurred while fetching articles');
             console.error(error);
           });
         }
       }
     }.bind(this);
 
-    this.widgets.push(new app.SentimentBalls(this._createDummyContainer('customer-sentiment-container'), this.model.data));
+    this.widgets.push(new app.SentimentBalls(
+      this._createDummyContainer('customer-sentiment-container'), this.model.data));
 
     var topicsLoadingContainer = document.getElementById('topics-loading-container');
 
@@ -292,12 +295,28 @@
     topicsDetailContainer.style.display = 'none';
 
     var fetchKeywordsPromise = this.model.fetchKeywords();
-    fetchKeywordsPromise.then(function(keywords) {
-      this.widgets.push(new app.TopicsTable(this._createDummyContainer('topic-list-container'), {
-        model: this.model
-      }));
 
-      this.widgets.push(new app.TopicsBallChart(this._createDummyContainer('topic-chart-container'), this.model.data));
+    var header = document.getElementById('details-header');
+
+    fetchKeywordsPromise.then(function() {
+
+      var topicsChart = new app.TopicsBallChart(
+          this._createDummyContainer('topic-chart-container'), this.model.data),
+        topicsTable = new app.TopicsTable(this._createDummyContainer('topic-list-container'), {
+          model: this.model
+        });
+
+      this.widgets.push(topicsTable);
+      this.widgets.push(topicsChart);
+
+      topicsChart.onClickHandle = function(data) {
+        var selectedElem = topicsTable.selectTopic(data);
+        if (selectedElem) {
+          var boundingRect = selectedElem.getBoundingClientRect();
+          var elemYDistance = boundingRect.top + window.pageYOffset - header.scrollHeight;
+          window.scroll(0, elemYDistance);
+        }
+      };
 
       topicsLoadingContainer.style.display = 'none';
       topicsDetailContainer.style.display = '';

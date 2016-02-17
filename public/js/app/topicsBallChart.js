@@ -1,4 +1,5 @@
 (function(app) {
+  'use strict';
   app.TopicsBallChart = function(dom, args) {
 
     this.domNode = dom;
@@ -9,24 +10,20 @@
   };
   app.TopicsBallChart.prototype._setup = function() {
     var margin = {
-      top: 10,
-      right: 30,
-      bottom: 10,
-      left: 10
-    };
+        top: 10,
+        right: 30,
+        bottom: 10,
+        left: 10
+      },
+      chartWidth = 800,
+      chartHeight = 300,
+      width = chartWidth - margin.left - margin.right,
+      height = chartHeight - margin.top - margin.bottom,
+      spacePerCircleBox = Math.floor(width / this.keywords.length),
+      spacePerCircle = Math.floor(spacePerCircleBox / 2),
+      circleRadius = Math.floor(spacePerCircle / 2),
+      circleMaxRadius = 25;
 
-
-    var chartWidth = 800,
-      chartHeight = 300;
-
-    var width = chartWidth - margin.left - margin.right;
-    var height = chartHeight - margin.top - margin.bottom;
-
-
-    var spacePerCircleBox = Math.floor(width / this.keywords.length);
-    var spacePerCircle = Math.floor(spacePerCircleBox / 2);
-    var circleRadius = Math.floor(spacePerCircle / 2);
-    var circleMaxRadius = 25;
     if (circleRadius > circleMaxRadius) {
       circleRadius = circleMaxRadius;
     }
@@ -80,7 +77,6 @@
       .attr('x2', width - spacePerCircle)
       .attr('y2', horizontalLineY);
 
-    var rectWidth = (width / 3) - 30;
 
     var circleXFunc = function(d, i) {
       return (i * spacePerCircleBox) + spacePerCircle;
@@ -98,55 +94,36 @@
       .attr('x2', circleXFunc)
       .attr('y2', horizontalLineY);
 
-    var rects = this._svg.selectAll('circle')
+    var nodeGroup = this._svg.selectAll('circle-node')
       .data(this.keywords)
-      .enter().append('circle')
-      //.classed('sentiment-circle', true)
-      .attr('cx', circleXFunc)
-      .attr('fill', '#FCEE6B')
-      .attr('cy', horizontalLineY)
+      .enter().append('g')
+      .classed('circle-node', true)
+      .attr('transform', function(d, i){
+        return 'translate(' + circleXFunc(d, i) + ',' + horizontalLineY + ')';
+      })
+      .on('click', function(d){
+        this.onClickHandle(d);
+      }.bind(this));
+
+    nodeGroup.append('circle')
+      .classed('circle-counter', true)
       .attr('r', circleRadius);
 
-    var formatNumberFunc = function(num) {
-      var million = 1000000;
-      var billion = 1000000000;
-      var thousand = 1000;
-      var threeDigit = 100;
-      var fixNum = 1;
-      var numToShow;
-      if (num >= (threeDigit * million)) {
-        numToShow = parseFloat(num / billion).toFixed(fixNum) + 'B';
-      } else if (num >= million) {
-        numToShow = parseFloat(num / million).toFixed(fixNum) + 'M';
-      } else if (num >= thousand) {
-        numToShow = parseFloat(num / thousand).toFixed(fixNum) + 'K';
-      } else {
-        numToShow = num;
-      }
-      return numToShow;
-    };
 
-
-    this._svg.selectAll('.ball-number')
-      .data(this.keywords)
-      .enter()
-      .append('text')
+    nodeGroup.append('text')
       .classed('ball-number', true)
-      .attr('x', function(d, i) {
-        var value = d.count;
-        var formattedNum = formatNumberFunc(d.count);
+      .attr('x', function(d) {
+        var formattedNum = this._formatNumber(d);
         var spacePerChar = 3;
         var totalSpace = spacePerChar * String(formattedNum).length;
         if (isNaN(formattedNum)) {
-          totalSpace += -1;
+          totalSpace -= 1;
         }
         var padding = 18 - totalSpace;
-        return circleXFunc(d, i) - circleRadius + padding;
-      })
-      .attr('y', horizontalLineY + 3)
-      .text(function(d, i) {
-        return formatNumberFunc(d.count);
-      });
+        return padding - circleRadius;
+      }.bind(this))
+      .attr('y', 3)
+      .text(this._formatNumber);
 
 
 
@@ -162,12 +139,11 @@
       .attr('y', function(d) {
         var yPoint = y(d.count);
         if (yPoint > circleThreshold) {
-
           yPoint = circleThreshold;
         }
         return yPoint + 10;
       })
-      .text(function(d, i) {
+      .text(function(d) {
         var objText = d.keyword;
         var textCutoffLen = 13;
         var ellipse = '...';
@@ -178,6 +154,31 @@
       });
 
 
+  };
+
+  app.TopicsBallChart.prototype.onClickHandle = function(/*data*/) {
+
+  };
+
+
+  app.TopicsBallChart.prototype._formatNumber = function(data) {
+    var num = data.count,
+      million = Math.pow(10, 6),
+      billion = Math.pow(10, 9),
+      thousand = Math.pow(10, 3),
+      threeDigit = 100,
+      fixNum = 1,
+      numToShow;
+    if (num >= (threeDigit * million)) {
+      numToShow = parseFloat(num / billion).toFixed(fixNum) + 'B';
+    } else if (num >= million) {
+      numToShow = parseFloat(num / million).toFixed(fixNum) + 'M';
+    } else if (num >= thousand) {
+      numToShow = parseFloat(num / thousand).toFixed(fixNum) + 'K';
+    } else {
+      numToShow = num;
+    }
+    return numToShow;
   };
 
   app.TopicsBallChart.prototype.remove = function() {
