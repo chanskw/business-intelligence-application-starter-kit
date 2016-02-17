@@ -401,7 +401,7 @@
 }
 
 .article-table .article-cell{
-  text-align: left;
+ text-align: left;
  border-bottom: 1px solid;
  padding-top: 20px;
  padding-bottom: 20px;
@@ -418,6 +418,14 @@
 .topic-chart .stick-text{
   font-size: 8px;
   font-family: HelvBoldIBM;
+}
+
+.topic-chart .circle-node:hover{
+  cursor: pointer;
+}
+
+.topic-chart .circle-counter{
+  fill: #FCEE6B;
 }
 
 /*Keywords or topics table*/

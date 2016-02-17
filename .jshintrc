@@ -12,7 +12,8 @@
     "waits": false,
     "$": true,
     "waitsFor": false,
-    "runs": false
+    "runs": false,
+	"d3": false
   },
 
   "node" : true,

@@ -1,4 +1,5 @@
 (function(app) {
+  'use strict';
   app.TopSourceBoxes = function(dom, args) {
     this.domNode = dom;
 
@@ -94,9 +95,7 @@
       .attr('x', 0)
       .attr('y', 0)
       .attr('height', height)
-      .attr('width', function(d) {
-        return rectWidth;
-      });
+      .attr('width', rectWidth);
 
 
     var sourceLimit = 15;
@@ -126,7 +125,7 @@
 
     var sentimentHeight = 15;
     var self = this;
-    var sentimentGroup = rectGroup.append('g')
+    rectGroup.append('g')
       .attr('transform', 'translate(' + 5 + ',' + (height - sentimentHeight) + ')')
       .each(function(d) {
         self._createSentimentBar(d.sentiments,
@@ -146,7 +145,8 @@
       paddingFromBottom = 2,
       maxCalculatedRadius = Math.floor(spacePerItem / 2),
       maxConstrainedRadius = Math.floor((height - paddingFromBottom) / 2),
-      maxCircleRadius = maxCalculatedRadius > maxConstrainedRadius ? maxConstrainedRadius : maxCalculatedRadius,
+      maxCircleRadius = maxCalculatedRadius > maxConstrainedRadius ?
+      maxConstrainedRadius : maxCalculatedRadius,
       radiusPerCircle = maxCircleRadius - paddingPerCircle;
 
     parent.selectAll('circle')

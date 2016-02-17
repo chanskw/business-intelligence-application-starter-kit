@@ -1,39 +1,61 @@
 (function(app) {
+  'use strict';
   app.TopicsTable = function(dom, args) {
     this.domNode = dom;
 
     this.model = args.model;
 
-
     this._setup();
     this.loadData(this.model.data.keywords);
   };
+
+  app.TopicsTable.TABLE_COLUMNS = [{
+    label: 'Topic',
+    prop: 'keyword',
+    colSpan: 2
+  }, {
+    label: 'Count of Mentions',
+    prop: 'count'
+  }, {
+    label: 'Sentiment',
+    prop: 'score'
+  }];
 
   app.TopicsTable.prototype.remove = function() {
     this.domNode.remove();
   };
 
+  app.TopicsTable.prototype.selectTopic = function(data) {
+    var tbody = this._table.selectAll('tbody')
+      .filter(function(d) {
+        return d === data;
+      });
+    var selectionRows = tbody.select('.keyword-row');
+    //there should only be one item but lets make sure
+    var isItemSelected = false,
+      romDomNode = null;
+    selectionRows.each(function() {
+      if (!isItemSelected) {
+        var row = d3.select(this);
+        row.on('click').apply(this, arguments);
+        romDomNode = row.node();
+        isItemSelected = true;
+      }
+    });
+    return romDomNode;
+  };
+
   app.TopicsTable.prototype._setup = function() {
     var table = this._table = d3.select(this.domNode)
       .append('table').attr('class', 'keywords-table-container');
-    this.tableColumns = [{
-      label: 'Topic',
-      prop: 'keyword'
-    }, {
-      label: 'Count of Mentions',
-      prop: 'count'
-    }, {
-      label: 'Sentiment',
-      prop: 'score'
-    }];
-    var sharedNoOfColumns = 2;
+
     table.append('thead')
       .append('tr')
       .selectAll('th')
-      .data(this.tableColumns).enter()
+      .data(app.TopicsTable.TABLE_COLUMNS).enter()
       .append('th')
-      .attr('colspan', function(d, i) {
-        return i ? 1 : sharedNoOfColumns;
+      .attr('colspan', function(d) {
+        return d.colSpan ? d.colSpan : 1;
       })
       .classed('keyword-heading', true)
       .text(function(d) {
@@ -43,10 +65,6 @@
 
   app.TopicsTable.prototype.loadData = function(data) {
 
-
-
-
-    var columns = this.tableColumns;
     var indexOfSentiment = 2;
     var model = this.model;
     //TODO: do not modify the model obj. Instead have a temporary metadata obj which
@@ -56,7 +74,7 @@
       .append('tbody');
     var row = rowGroupSelection.append('tr')
       .classed('keyword-row', true)
-      .on('click', function(d, i) {
+      .on('click', function(d) {
         var carrotDiv = d3.select(d._carrotDiv);
         if (!d._dummyDiv) {
           var dummyDiv = d._dummyDiv = document.createElement('div');
@@ -69,7 +87,7 @@
 
           var sentimentPromise = model.fetchKeywordSentiments(d);
           var row = this;
-          sentimentPromise.then(function(sentiments) {
+          sentimentPromise.then(function() {
             //incase row is closed before the response comes back
             if (d._dummyDiv) {
               dummyDiv.innerHTML = '';
@@ -93,7 +111,7 @@
     rowGroupSelection.append('tr')
       .append('td')
       //include the carrot's columns
-      .attr('colspan', columns.length + 1)
+      .attr('colspan', app.TopicsTable.TABLE_COLUMNS.length + 1)
       .append('div')
       .each(function(d) {
         d._graphDiv = this;
@@ -108,8 +126,8 @@
       });
 
     var td = row.selectAll('.data-column-entry')
-      .data(function(entry, i) {
-        return columns.map(function(col) {
+      .data(function(entry) {
+        return app.TopicsTable.TABLE_COLUMNS.map(function(col) {
 
           return entry[col.prop];
         });
