@@ -179,7 +179,7 @@
       var sentimentPromises = [];
       if (!keywordObj.sentiments) {
         sentiments.forEach(function(sentiment) {
-          var sentimentPromise = self._sendRequest(self._getServiceURL('keywords.0'), {
+          var sentimentPromise = self._sendRequest(self._getServiceURL('keywords'), {
             keyword: keywordObj.keyword,
             sentiment: sentiment,
             slice: '1d'
