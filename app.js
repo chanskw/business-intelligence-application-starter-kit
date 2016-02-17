@@ -30,8 +30,13 @@ var toneAnalyzer = watson.tone_analyzer({
   isStreaming: false,
   username: '<username>',
   password: '<password>',
+<<<<<<< HEAD
   version_date: '2016-02-11',
   version: 'v3-beta'
+=======
+  version: 'v3-beta',
+  version_date: '2016-02-11'
+>>>>>>> pr/2
 });
 
 var alchemyApiKey = { api_key: process.env.ALCHEMY_API_KEY || '<your api key>'};
@@ -63,7 +68,14 @@ app.get('/api/sentiment', function (req, res, next) {
   getNews(params).then(function(news) {
     return res.json(news.result);
   })
-  .catch(next);
+  .catch(function(error){
+    // if we get a 404 from AlchemyDataNews
+    if (error && error.code === 404) {
+      error.error = 'Article not found';
+    }
+    next(error);
+  });
+
  });
 
 app.get('/api/keywords', function (req, res, next) {
@@ -104,7 +116,7 @@ app.get('/api/keywords', function (req, res, next) {
           });
         }
         else {
-          console.log(JSON.stringify(doc, null, 4));
+          console.log(JSON.stringify(doc, null, 2));
         }
       });
 
@@ -199,8 +211,7 @@ app.get('/api/articles', function (req, res, next) {
     start: req.query.start,
     end: req.query.end,
     return: 'q.enriched.url.title,q.enriched.url.url,enriched.url.docSentiment.score',
-    'q.enriched.url.enrichedTitle.entities.entity':
-      '\|text=' + req.query.entity + ',type=company,relevance=>0.25\|',
+    'q.enriched.url.enrichedTitle.entities.entity': entityQuery(req.query.entity),
     'q.enriched.url.url': req.query.source
   };
 

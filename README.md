@@ -195,7 +195,7 @@ When troubleshooting your Bluemix app, the most useful source of information is 
 
 [cloud_foundry]: https://github.com/cloudfoundry/cli
 [sign_up]: https://console.ng.bluemix.net/registration/
-// [get-alchemyapi-key]: https://console.ng.bluemix.net/catalog/services/alchemyapi/
+[get-alchemyapi-key]: https://console.ng.bluemix.net/catalog/services/alchemyapi/
 [get-alchemyapi-key]: http://www.alchemyapi.com/api/register.html
 [tone-analyzer]: http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/tone-analyzer.html
 [alchemydata-news]: http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/alchemy-data-news.html
