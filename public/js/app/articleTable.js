@@ -1,6 +1,5 @@
 (function(app) {
 
-
   app.ArticleTable = function(dom, args) {
     this.domNode = dom;
 
