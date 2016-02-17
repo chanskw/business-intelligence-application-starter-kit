@@ -50,6 +50,7 @@ svg {
   height: 70px;
   position: fixed;
   width: 100%;
+  z-index: 100;
 }
 .header-h1-title {
   padding-left: 64px;
@@ -242,6 +243,7 @@ svg {
   right: 0px;
   padding-left: 6%;
   padding-right: 6%;
+  z-index: 100;
 }
 .date-panel {
   padding-top: 25px;
