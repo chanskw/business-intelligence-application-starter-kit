@@ -13,7 +13,8 @@
     "$": true,
     "waitsFor": false,
     "runs": false,
-	"d3": false
+	"d3": false,
+	"Promise": false
   },
 
   "node" : true,
