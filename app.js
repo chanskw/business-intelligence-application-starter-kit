@@ -61,7 +61,14 @@ app.get('/api/sentiment', function (req, res, next) {
   getNews(params).then(function(news) {
     return res.json(news.result);
   })
-  .catch(next);
+  .catch(function(error){
+    // if we get a 404 from AlchemyDataNews
+    if (error && error.code === 404) {
+      error.error = 'Article not found';
+    }
+    next(error);
+  });
+
  });
 
 app.get('/api/keywords', function (req, res, next) {
