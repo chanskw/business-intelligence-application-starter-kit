@@ -35,6 +35,13 @@
       .classed('topic-chart', true)
       .attr('preserveAspectRatio', 'xMinYMin meet')
       .attr('viewBox', '0 0 ' + chartWidth + ' ' + chartHeight)
+      .attr('width', '100%')
+      .attr('height', function() {
+        if (browserInfo.search('ie') !== -1)
+          return '300';
+        else
+          return '100%';
+      })
       .append('g')
       .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
 
