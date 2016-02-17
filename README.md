@@ -148,9 +148,7 @@ Follow the steps in the [previous section](#getting-started) and ensure that you
 ## About the Business Intelligence pattern
 
 The Business Intelligence Pattern is made up of two major components:
-[Architecture Diagram] (pattern.tiff)
-
-
+![Architecture Diagram] (doc/pattern.tiff)
 
 
 
