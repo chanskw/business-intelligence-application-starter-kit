@@ -1,4 +1,5 @@
 (function(app) {
+  'use strict';
   app.DatePicker = function(dom) {
     this.domNode = dom;
 
@@ -9,7 +10,7 @@
   app.DatePicker.MIN_TIME = -60;
   app.DatePicker.MAX_TIME = 0;
 
-  app.DatePicker.prototype.onDateChange = function(startDay, endDay) {
+  app.DatePicker.prototype.onDateChange = function(/*startDay, endDay*/) {
 
   };
 
@@ -35,7 +36,7 @@
       left: 10
     };
     var width = originalWidth - margin.left - margin.right;
-    var height = originalHeight - margin.top - margin.bottom;
+    //var height = originalHeight - margin.top - margin.bottom;
 
     var topSpace = 10;
     var sliderHeight = 4;
@@ -46,10 +47,32 @@
       .range([0, width])
       .domain([app.DatePicker.MIN_TIME, app.DatePicker.MAX_TIME]);
 
+    var datePicker = this;
+
+    var brushEndedFunc = function() {
+      if (d3.event.sourceEvent) {
+        var originalExtent = brush.extent();
+        var newExtent = [];
+        originalExtent.forEach(function(extent) {
+          newExtent.push(Math.round(extent));
+        });
+        if(newExtent[0] === newExtent[1]){
+          if(newExtent[0] === app.DatePicker.MIN_TIME){
+            newExtent[1] += 1;
+          }else{
+            newExtent[0] -= 1;
+          }
+        }
+        d3.select(this).transition()
+          .call(brush.extent(newExtent))
+          .call(brush.event);
+        datePicker.onDateChange(newExtent[0], newExtent[1]);
+      }
+    };
 
     var brush = this._brush = d3.svg.brush()
       .x(x)
-      .on('brushend', brushended);
+      .on('brushend', brushEndedFunc);
 
 
     var svg = d3.select(this.domNode).append('svg')
@@ -96,28 +119,6 @@
       .attr('transform', 'translate(0,' + triangleUpY + ')')
       .attr('d', triangleUp).classed('arrow-handle', true);
 
-    var datePicker = this;
-
-    function brushended() {
-      if (d3.event.sourceEvent) {
-        var originalExtent = brush.extent();
-        var newExtent = [];
-        originalExtent.forEach(function(extent) {
-          newExtent.push(Math.round(extent));
-        });
-        if(newExtent[0] === newExtent[1]){
-          if(newExtent[0] === app.DatePicker.MIN_TIME){
-            newExtent[1] += 1;
-          }else{
-            newExtent[0] -= 1;
-          }
-        }
-        d3.select(this).transition()
-          .call(brush.extent(newExtent))
-          .call(brush.event);
-        datePicker.onDateChange(newExtent[0], newExtent[1]);
-      }
-    }
 
   };
 

@@ -225,7 +225,6 @@
                 function(text) {
                   return text.charAt(0).toUpperCase() + text.substring(1).toLowerCase();
                 });
-              console.log(result.label);
             });
             results.sort(function(item1, item2) {
               return item2.count - item1.count;
