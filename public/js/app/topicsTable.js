@@ -11,7 +11,7 @@
 
   app.TopicsTable.TABLE_COLUMNS = [{
     label: 'Topic',
-    prop: 'keyword',
+    prop: 'label',
     colSpan: 2
   }, {
     label: 'Count of Mentions',
