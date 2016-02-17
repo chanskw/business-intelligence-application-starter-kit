@@ -26,7 +26,7 @@ This application requires an AlchemyAPI key with high transaction limits. The fr
 
 This application provides a query interface that lets users search for information about a company and how it is publicly perceived. The query interface uses the semantic information available from AlchemyAPI to limit search results to company-related information.
 
-AlchemyData News provides extensive access to news sources, which are then analyzed by the Tone Analyzer service to show how the company or its products are perceived. In addition, the overall customer sentiment about the company is displayed, as well as sentiment information about the top 10 related concepts.
+AlchemyData News provides extensive access to news sources, which are then analyzed by the Tone Analyzer service to show how the company is perceived. In addition, the overall customer sentiment about the company is displayed, as well as sentiment information about the top 10 related concepts.
 
 ## Getting started
 The application is written in [Node.js](http://nodejs.org/) and uses [npm](https://www.npmjs.com/).  Instructions for downloading and installing these are included in the following procedure.
@@ -47,9 +47,9 @@ The following instructions explain how to [fork the project on GitHub](https://g
   5. If it is not already installed on your system, install [Node.js](http://nodejs.org/). Installing Node.js will also install the `npm` command.
 
   6. Open app.js file, and specify the API key here:
-  
+
      `var alchemyApiKey = { api_key: process.env.ALCHEMY_API_KEY || '<your api key>'};`
-  
+
   7. Edit the `manifest.yml` file in the folder that contains your fork and replace `application-name` with a unique name for your copy of the application. The name that you specify determines the application's URL, such as `application-name.mybluemix.net`.
 
     ```yml
@@ -58,8 +58,8 @@ The following instructions explain how to [fork the project on GitHub](https://g
         - tone-analyzer-service
       name: application-name
       path: .
-      memory: 1024M
-      disk_quota: 1024M
+      memory: 512M
+      disk_quota: 512M
     ```
   6. Connect to Bluemix by running the following commands in a terminal window:
 
@@ -92,9 +92,9 @@ Follow the steps in the [previous section](#getting-started) and ensure that you
     ```
 
   2. Open app.js file, and specify the API key here:
-   
+
      `var alchemyApiKey = { api_key: process.env.ALCHEMY_API_KEY || '<your api key>'};`
-  
+
   3. Create a `.env.js` file in the root directory of the project with the following content:
 
       ```js
@@ -146,6 +146,13 @@ Follow the steps in the [previous section](#getting-started) and ensure that you
   6. Open [http://localhost:6001](http://localhost:6001) to see the running application.
 
 ## About the Business Intelligence pattern
+
+The Business Intelligence Pattern is made up of two major components:
+[Architecture Diagram] (pattern.tiff)
+
+
+
+
 
 **PLACEHOLDER**
 
