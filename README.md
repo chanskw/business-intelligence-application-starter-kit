@@ -148,7 +148,7 @@ Follow the steps in the [previous section](#getting-started) and ensure that you
 ## About the Business Intelligence pattern
 
 The Business Intelligence Pattern is made up of two major components:
-<img src="doc/pattern.tiff" style="width:50px;">
+<img src="doc/pattern.tiff" style="width:50%;">
 
 
 
