@@ -30,13 +30,8 @@ var toneAnalyzer = watson.tone_analyzer({
   isStreaming: false,
   username: '<username>',
   password: '<password>',
-<<<<<<< HEAD
-  version_date: '2016-02-11',
-  version: 'v3-beta'
-=======
   version: 'v3-beta',
   version_date: '2016-02-11'
->>>>>>> pr/2
 });
 
 var alchemyApiKey = { api_key: process.env.ALCHEMY_API_KEY || '<your api key>'};
