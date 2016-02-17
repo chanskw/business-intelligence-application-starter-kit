@@ -1,6 +1,5 @@
 (function(app) {
-
-
+  'use strict';
   app.WatsonModel = function() {
     this.data = null;
 
@@ -23,7 +22,7 @@
     return time >= app.WatsonModel.TIME_LIMIT && time <= 0;
   };
 
-  app.WatsonModel.prototype.abort = function(time) {
+  app.WatsonModel.prototype.abort = function() {
     this._pendingRequests.forEach(function(pendingRequest) {
       pendingRequest.abort();
     });
@@ -106,14 +105,13 @@
 
 
   app.WatsonModel.prototype._getSourceId = function(source) {
-    var startCutOff = 0;
     var prefix = 'www.';
     var sourceProcessed = source;
-    if (source.indexOf(prefix) != -1) {
+    if (source.indexOf(prefix) !== -1) {
       sourceProcessed = source.substring(prefix.length);
     }
     var indexOfSep = sourceProcessed.indexOf('.');
-    if (indexOfSep != -1) {
+    if (indexOfSep !== -1) {
       sourceProcessed = sourceProcessed.substring(0, indexOfSep);
     }
     return sourceProcessed;
@@ -123,7 +121,7 @@
     var self = this;
     return new Promise(function(resolve, reject) {
       var tonePromises = [];
-      articles.forEach(function(article, index) {
+      articles.forEach(function(article) {
         if (!article.tone) {
           tonePromises.push(self._sendRequest(self._getServiceURL('tone'), {
             url: article.url
@@ -157,7 +155,7 @@
             sourceObj.articles.push.apply(sourceObj.articles,
               responseArticles.splice(startDelete));
             sourceObj._articleBoundary = articleLimit;
-            self._fetchTones(sourceObj.articles).then(function(tones) {
+            self._fetchTones(sourceObj.articles).then(function() {
               resolve(sourceObj.articles);
             }).catch(function(reason) {
               reject(reason);
@@ -181,7 +179,7 @@
       var sentimentPromises = [];
       if (!keywordObj.sentiments) {
         sentiments.forEach(function(sentiment) {
-          var sentimentPromise = self._sendRequest(self._getServiceURL('keywords'), {
+          var sentimentPromise = self._sendRequest(self._getServiceURL('keywords.0'), {
             keyword: keywordObj.keyword,
             sentiment: sentiment,
             slice: '1d'
@@ -223,6 +221,11 @@
           Promise.all(keywordCountPromises).then(function(countResponses) {
             results.forEach(function(result, index) {
               result.count = countResponses[index].count;
+              result.label = result.keyword.replace(/(?!IBM\b)\b\w+/g,
+                function(text) {
+                  return text.charAt(0).toUpperCase() + text.substring(1).toLowerCase();
+                });
+              console.log(result.label);
             });
             results.sort(function(item1, item2) {
               return item2.count - item1.count;
@@ -245,11 +248,11 @@
       source: sourceObj.sourceId
     });
     return new Promise(function(resolve, reject) {
-      actualCountPromise.then(function(actualCountObj){
+      actualCountPromise.then(function(actualCountObj) {
         sourceObj.count = actualCountObj.count;
         resolve(sourceObj);
-      }).catch(function(reason){
-          reject(reason);
+      }).catch(function(reason) {
+        reject(reason);
       });
     });
   };
@@ -288,7 +291,7 @@
       Promise.all([
           self.fetchSentiment(),
           self.fetchTopSources()
-        ]).then(function(responses) {
+        ]).then(function() {
           resolve(self);
         })
         .catch(function(reason) {
@@ -330,7 +333,6 @@
         source: sourceObj.sourceId
       }));
     }, this);
-    var self = this;
     return new Promise(function(resolve, reject) {
       Promise.all(promises).then(function(responses) {
           sourceObj.sentiments = {};
@@ -346,12 +348,12 @@
   };
 
   app.WatsonModel.prototype._getServiceURL = function(path) {
-    return '/' + globalProperties.serviceEndpoint + '/' + path;
+    return '/' + window.globalProperties.serviceEndpoint + '/' + path;
   };
 
   app.WatsonModel.prototype.configureModel = function(defaultOptions) {
     var date = new Date();
-    date.setHours(0,0,0,0);
+    date.setHours(0, 0, 0, 0);
     this.updateDate = date.getTime();
     this.entity = defaultOptions.entity;
     this.start = defaultOptions.start;

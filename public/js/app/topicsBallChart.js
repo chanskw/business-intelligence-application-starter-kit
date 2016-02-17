@@ -144,7 +144,7 @@
         return yPoint + 10;
       })
       .text(function(d) {
-        var objText = d.keyword;
+        var objText = d.label;
         var textCutoffLen = 13;
         var ellipse = '...';
         if (objText.length > textCutoffLen) {
