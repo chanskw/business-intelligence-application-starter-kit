@@ -18,7 +18,8 @@
 
 // Module dependencies
 var express    = require('express'),
-  bodyParser   = require('body-parser');
+  bodyParser   = require('body-parser'),
+  compression  = require('compression');
 
 module.exports = function (app) {
   // Only loaded when SECURE_EXPRESS is `true`
@@ -31,6 +32,9 @@ module.exports = function (app) {
 
   // Pretty print JSON
   app.set('json spaces', 2);
+
+  // compress all requests
+  app.use(compression());
 
   // Setup static public directory
   app.use(express.static(__dirname + '/../public'));

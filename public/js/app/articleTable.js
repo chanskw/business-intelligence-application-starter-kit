@@ -1,6 +1,5 @@
 (function(app) {
-
-
+  'use strict';
   app.ArticleTable = function(dom, args) {
     this.domNode = dom;
 
@@ -62,23 +61,28 @@
             break;
           case 'tone':
             var tones = [];
-            rowData.tone.children.forEach(function(toneCategory) {
-              if (toneCategory.id === 'emotion_tone') {
-                toneCategory.children.forEach(function(tone) {
-                  if (tone.normalized_score !== 0) {
-                    tones.push(tone);
-                  }
-                });
-              }
-            });
+            if(rowData.tone &&
+              rowData.tone.document_tone &&
+              rowData.tone.document_tone.tone_categories instanceof Array
+              ){
+              rowData.tone.document_tone.tone_categories.forEach(function(toneCategory) {
+                if (toneCategory.category_id === 'emotion_tone') {
+                  toneCategory.tones.forEach(function(tone) {
+                    if (tone.score !== 0) {
+                      tones.push(tone);
+                    }
+                  });
+                }
+              });
+            }
             tones.sort(function(elem1, elem2) {
-              return elem2.normalized_score - elem1.normalized_score;
+              return elem2.score - elem1.score;
             });
             var toneText = '';
             var sep = '';
             tones.forEach(function(tone) {
               toneText += sep;
-              toneText += tone.name + ' (' + (tone.normalized_score * 100).toFixed(2) + '%)';
+              toneText += tone.tone_name + ' (' + (tone.score * 100).toFixed(2) + '%)';
               sep = ', ';
             });
             td.html(toneText);
