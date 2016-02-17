@@ -19,8 +19,6 @@
  font-style:normal
 }
 
-
-
  /*Main page */
  html{
    height: 100%;
@@ -34,6 +32,10 @@
    flex-direction: column;
    font-family: HelvRegularIBM;
    min-width: 960px;
+ }
+
+ svg {
+   overflow: hidden;
  }
 
 
@@ -321,6 +323,7 @@
 .summary-row{
   display: flex;
   flex-flow: row nowrap;
+  overflow: hidden;
 }
 
 .summary-row > article{
