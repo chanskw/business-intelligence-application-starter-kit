@@ -46,8 +46,10 @@ The following instructions explain how to [fork the project on GitHub](https://g
 
   5. If it is not already installed on your system, install [Node.js](http://nodejs.org/). Installing Node.js will also install the `npm` command.
 
-  6. Create a file named `api_key.txt` in the folder that contains your fork. Copy your Alchemy API key into this file.
-
+  6. Open app.js file, and specify the API key here:
+  
+     `var alchemyApiKey = { api_key: process.env.ALCHEMY_API_KEY || '<your api key>'};`
+  
   7. Edit the `manifest.yml` file in the folder that contains your fork and replace `application-name` with a unique name for your copy of the application. The name that you specify determines the application's URL, such as `application-name.mybluemix.net`.
 
     ```yml
@@ -89,7 +91,11 @@ Follow the steps in the [previous section](#getting-started) and ensure that you
     $ npm install
     ```
 
-  2. Create a `.env.js` file in the root directory of the project with the following content:
+  2. Open app.js file, and specify the API key here:
+   
+     `var alchemyApiKey = { api_key: process.env.ALCHEMY_API_KEY || '<your api key>'};`
+  
+  3. Create a `.env.js` file in the root directory of the project with the following content:
 
       ```js
       'use strict';
@@ -98,7 +104,7 @@ Follow the steps in the [previous section](#getting-started) and ensure that you
         VCAP_SERVICES: JSON.stringify({
           tone_analyzer: [{
             credentials: {
-              url: 'https://gateway.watsonplatform.net/tone-analyzer-beta/api",
+              url: 'https://gateway.watsonplatform.net/tone-analyzer-beta/api',
               username: 'TONE ANALYZER USERNAME HERE',
               password: 'TONE ANALYZER PASSWORD HERE'
             }
@@ -108,7 +114,7 @@ Follow the steps in the [previous section](#getting-started) and ensure that you
       })};
       ```
 
-  3. Copy the `username`, `password`, and `url` credentials from your `tone-analyzer-service` service in Bluemix to the previous file. To see the service credentials for your Tone Analyzer service instance, run the following command, replacing `<application-name>` with the name of the application that you specified in your `manifest.yml` file:
+  4. Copy the `username`, `password`, and `url` credentials from your `tone-analyzer-service` service in Bluemix to the previous file. To see the service credentials for your Tone Analyzer service instance, run the following command, replacing `<application-name>` with the name of the application that you specified in your `manifest.yml` file:
     ```sh
     $ cf env <application-name>
     ```
@@ -131,13 +137,13 @@ Follow the steps in the [previous section](#getting-started) and ensure that you
     }
     ```
 
-  4. Start the application by running:
+  5. Start the application by running:
 
     ```sh
     $ node app.js
     ```
 
-  5. Open [http://localhost:6001](http://localhost:6001) to see the running application.
+  6. Open [http://localhost:6001](http://localhost:6001) to see the running application.
 
 ## About the Business Intelligence pattern
 
@@ -189,7 +195,7 @@ When troubleshooting your Bluemix app, the most useful source of information is 
 
 [cloud_foundry]: https://github.com/cloudfoundry/cli
 [sign_up]: https://console.ng.bluemix.net/registration/
-// [get-alchemyapi-key]: https://console.ng.bluemix.net/catalog/services/alchemyapi/
+[get-alchemyapi-key]: https://console.ng.bluemix.net/catalog/services/alchemyapi/
 [get-alchemyapi-key]: http://www.alchemyapi.com/api/register.html
 [tone-analyzer]: http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/tone-analyzer.html
 [alchemydata-news]: http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/alchemy-data-news.html
