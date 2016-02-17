@@ -27,6 +27,7 @@ var express = require('express'),
 require('./config/express')(app);
 
 var toneAnalyzer = watson.tone_analyzer({
+  isStreaming: false,
   username: '<username>',
   password: '<password>',
   version: 'v3-beta',
