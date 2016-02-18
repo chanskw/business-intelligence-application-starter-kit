@@ -233,7 +233,12 @@ app.get('/api/tone', function (req, res, next) {
        res.json(tone[0]);
      });
    })
-   .catch(next);
+   .catch(function(error){
+     // If there is any error in fetching the article, return an empty
+     // tone object to avoid errors in the UI.
+     var emptyTone = {};
+     res.json(emptyTone);
+   });
  });
 
 // error-handler settings
