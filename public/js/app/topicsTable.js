@@ -82,6 +82,8 @@
 
           d._graphDiv.appendChild(dummyDiv);
           d._graphDiv.style.display = 'flex';
+          if (browserInfo.search('ie') !== -1)
+            d._graphDiv.style.display = '-ms-flexbox';
 
           carrotDiv.classed('carrot-expanded', true);
 

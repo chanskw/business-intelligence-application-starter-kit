@@ -1,81 +1,79 @@
 /*Fonts */
+
 @font-face {
   font-family: "HelvBoldIBM";
   font-style: normal;
   font-weight: bold;
   src: url("//1.www.s81c.com/common/fonts/hni-bold.eot?#iefix") format("embedded-opentype"), url("//1.www.s81c.com/common/fonts/hni-bold.woff") format("woff"), url("//1.www.s81c.com/common/fonts/hni-bold.ttf") format("truetype"), url("//1.www.s81c.com/common/fonts/hni-bold.svg#HelvBoldIBM") format("svg");
 }
-
 @font-face {
- font-family: "HelvLightIBM";
- font-style: normal;
- src: url("//1.www.s81c.com/common/fonts/hni-light.eot?#iefix") format("embedded-opentype"), url("//1.www.s81c.com/common/fonts/hni-light.woff") format("woff"), url("//1.www.s81c.com/common/fonts/hni-light.ttf") format("truetype"), url("//1.www.s81c.com/common/fonts/hni-light.svg#HelvLightIBM") format("svg");
+  font-family: "HelvLightIBM";
+  font-style: normal;
+  src: url("//1.www.s81c.com/common/fonts/hni-light.eot?#iefix") format("embedded-opentype"), url("//1.www.s81c.com/common/fonts/hni-light.woff") format("woff"), url("//1.www.s81c.com/common/fonts/hni-light.ttf") format("truetype"), url("//1.www.s81c.com/common/fonts/hni-light.svg#HelvLightIBM") format("svg");
+}
+@font-face {
+  font-family: 'HelvRegularIBM';
+  src: url("//1.www.s81c.com/common/fonts/hni.eot");
+  src: url("//1.www.s81c.com/common/fonts/hni.eot?#iefix") format("embedded-opentype"), url("//1.www.s81c.com/common/fonts/hni.woff") format("woff"), url("//1.www.s81c.com/common/fonts/hni.ttf") format("truetype"), url("//1.www.s81c.com/common/fonts/hni.svg#HelvRegularIBM") format("svg");
+  font-weight: normal;
+  font-style: normal
 }
 
-@font-face{
- font-family:'HelvRegularIBM';
- src:url("//1.www.s81c.com/common/fonts/hni.eot");src:url("//1.www.s81c.com/common/fonts/hni.eot?#iefix") format("embedded-opentype"),url("//1.www.s81c.com/common/fonts/hni.woff") format("woff"),url("//1.www.s81c.com/common/fonts/hni.ttf") format("truetype"),url("//1.www.s81c.com/common/fonts/hni.svg#HelvRegularIBM") format("svg");
- font-weight:normal;
- font-style:normal
+/*Main page */
+
+* {
+  box-sizing: border-box;
 }
-
-
-
- /*Main page */
- html{
-   height: 100%;
- }
-
-
- body{
-   height: 100%;
-   margin: 0;
-   display: flex;
-   flex-direction: column;
-   font-family: HelvRegularIBM;
-   min-width: 960px;
- }
-
+html {
+  height: 100%;
+}
+body {
+  height: 100%;
+  margin: 0px;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  font-family: HelvRegularIBM;
+  min-width: 960px;
+}
+svg {
+  overflow: hidden;
+}
 
 /*Header*/
 
-.header-container
-{
+.header-container {
   background-color: #4A418C;
   color: white;
   height: 70px;
   position: fixed;
   width: 100%;
+  z-index: 100;
 }
-
-.header-h1-title{
+.header-h1-title {
   padding-left: 64px;
   font-size: 1rem;
-  margin: 0;
+  margin: 0px;
   float: left;
   font-weight: normal;
   line-height: 70px;
   font-family: HelvBoldIBM;
 }
-
-.header-title-pronounce{
+.header-title-pronounce {
   font-weight: bold;
 }
 
-
-
 /*Search field*/
 
-.entity-input-details{
+.entity-input-details {
   height: 35px;
   font-size: 18px;
   font-family: HelvRegularIBM;
 }
-
-
-.search-field{
+.search-field {
   position: relative;
-  float:right;
+  float: right;
   margin-right: 118px;
   padding-top: 10px;
   border-bottom-style: solid;
@@ -83,12 +81,10 @@
   border-bottom-width: 1px;
   width: 288px;
 }
-
 .search-field input {
   margin-left: 40px;
   outline: none;
 }
-
 .search-field span {
   background: url("images/search_icon_small.svg") no-repeat;
   position: absolute;
@@ -96,74 +92,73 @@
   left: 10px;
   width: 18px;
   height: 18px;
-  background-size:contain;
+  background-size: contain;
 }
 
 /*Main page*/
 
-#entity-description{
+#entity-description {
   float: right;
   width: 288px;
   font-family: HelvRegularIBM;
   font-size: 16px;
 }
-
-.main-container{
+.main-container {
+  -ms-flex: 1;
   flex: 1;
+  display: -ms-flexbox;
   display: flex;
+  -ms-flex-direction: column;
   flex-direction: column;
   margin-top: 70px;
 }
 
-
 /*Loader*/
-.ask-watson-loader{
+
+.ask-watson-loader {
   position: fixed;
   top: 70px;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
   background-color: #F2F2F2;
 }
-
-.loader-holder{
-  margin: -90px 0 0 -60px;
+.loader-holder {
+  margin: -90px 0px 0px -60px;
   top: 50%;
   left: 50%;
   position: absolute;
 }
 
-
 /*Welcome page*/
 
-.welcome-flex{
+.welcome-flex {
+  display: -ms-flexbox;
   display: flex;
+  -ms-flex: 1;
   flex: 1;
+  -ms-flex-direction: column;
   flex-direction: column;
   background-color: #6854BF;
   color: #FFFFFF;
 }
-
-.welcome-box{
+.welcome-box {
   margin: 130px auto;
   width: 800px;
+  -ms-flex: 1;
   flex: 1;
 }
-
-.message-welcome-container{
+.message-welcome-container {
   padding-bottom: 100px;
 }
-
-.message-welcome-strong{
+.message-welcome-strong {
   font-family: HelvBoldIBM;
 }
-
-.message-welcome{
+.message-welcome {
   font-size: 24px;
   font-family: HelvLightIBM;
 }
-
-.entity-input{
+.entity-input {
   border-color: #FFFFFF;
   border-top: 0;
   border-right: 0;
@@ -172,17 +167,14 @@
   background-color: transparent;
   color: inherit;
 }
-
-.welcome-search-field{
+.welcome-search-field {
   position: relative;
   border-color: #FFFFFF;
   border-bottom: 1px solid;
 }
-
-
-.welcome-search-field ::-webkit-input-placeholder {
-   color: #B9B7F9;
-   font-family: HelvRegularIBM;
+.welcome-search-field::-webkit-input-placeholder {
+  color: #B9B7F9;
+  font-family: HelvRegularIBM;
 }
 .welcome-search-field span {
   background: url("images/search_icon_small.svg") no-repeat;
@@ -191,10 +183,9 @@
   left: 10px;
   width: 40px;
   height: 40px;
-  background-size:contain;
+  background-size: contain;
 }
-
-.entity-input-welcome{
+.entity-input-welcome {
   height: 100px;
   font-size: 60px;
   margin-left: 70px;
@@ -204,332 +195,284 @@
 
 /*Details page*/
 
-.details-section-container > *{
+.details-section-container > * {
   padding-left: 6%;
   padding-right: 6%;
 }
-
-.details-header-section{
+.details-header-section {
   padding-top: 20px;
   background-color: #6854BF;
   color: white;
 }
-
-.details-header-title{
-  margin: 0;
+.details-header-title {
+  margin: 0px;
   font-weight: normal;
   font-size: 60px;
   display: inline;
   font-family: HelvLightIBM;
 }
-
-
-.details-section-body{
+.details-section-body {
   background-color: white;
   color: black;
 }
-
-.details-sticky-space{
+.details-sticky-space {
   margin-top: 210px;
 }
-
-.details-card-title{
+.details-card-title {
   border-bottom: medium solid black;
   padding-bottom: 10px;
-  padding-top: 28px
-  font-family: HelvBoldIBM;
+  padding-top: 28px font-family: HelvBoldIBM;
   font-size: 18px;
 }
-
-.details-card-description{
+.details-card-description {
   font-family: HelvLightIBM;
   font-size: 14px;
 }
 
-
 /*Date picker*/
 
-.date-container{
+.date-container {
   padding-top: 10px;
 }
-
-.fixed-date-container{
+.fixed-date-container {
   background-color: #6854BF;
   position: fixed;
   top: 70px;
-  left: 0;
-  right: 0;
+  left: 0px;
+  right: 0px;
   padding-left: 6%;
   padding-right: 6%;
+  z-index: 100;
 }
-
-.date-panel{
+.date-panel {
   padding-top: 25px;
 }
-
-.date-picker-label{
+.date-picker-label {
   font-size: 18px;
   font-family: HelvLightIBM;
 }
-
-.date-picker .axis path{
+.date-picker .axis path {
   fill: none;
   shape-rendering: crispEdges;
 }
-
 .date-picker .axis line {
   stroke: #FFFFFF;
 }
-
-
 .date-picker .brush .extent {
   shape-rendering: crispEdges;
   fill: #FFFFFF;
 }
-
 .date-picker .brush .background {
   visibility: visible !important;
   fill: #4A418C;
 }
-
 .date-picker .resize {
-  display: inline !important; /* show when empty */
+  display: inline !important;
+  /* show when empty */
   fill: #666;
   fill-opacity: 1;
   stroke: #000;
   stroke-width: 1.5px;
 }
-
 .date-picker .axis text {
-	font-family: HelvRegularIBM;
-	font-size: 12px;
+  font-family: HelvRegularIBM;
+  font-size: 12px;
   font-weight: bold;
   fill: #FFFFFF;
 }
-
-.date-picker .days-postfix-text{
+.date-picker .days-postfix-text {
   font-family: HelvLightIBM;
   font-size: 10px;
 }
-
-.date-picker .arrow-handle{
+.date-picker .arrow-handle {
   fill: #FCEE6B;
   stroke: transparent;
 }
 
-
 /*Summary row*/
 
-.summary-row{
+.summary-row {
+  display: -ms-flexbox;
   display: flex;
+  -ms-flex-flow: row nowrap;
   flex-flow: row nowrap;
+  overflow: hidden;
 }
-
-.summary-row > article{
+.summary-row > article {
+  -ms-flex: 1;
   flex: 1;
 }
-
-.summary-row-first-item{
+.summary-row-first-item {
   margin-right: 50px;
 }
-
-.summary-row-second-item{
+.summary-row-second-item {
   margin-left: 50px;
 }
 
 /*Widgets in detail summary*/
-.customer-sentiment-desc-container{
+
+.customer-sentiment-desc-container {
   padding-bottom: 30px;
 }
-
-.sentiment-balls .sentiment-circle{
+.sentiment-balls .sentiment-circle {
   stroke: transparent;
 }
-
-.sentiment-balls .sentiment-percent{
+.sentiment-balls .sentiment-percent {
   font-family: HelvBoldIBM;
 }
-
-.sources-desc-container{
+.sources-desc-container {
   padding-bottom: 30px;
 }
 
 /*Top sources*/
-.top-sources .source-rect{
+
+.top-sources .source-rect {
   fill: transparent;
   stroke: black;
   stroke-width: 1px;
 }
-
-.top-sources .source-rect:hover{
+.top-sources .source-rect:hover {
   cursor: pointer;
 }
-
-.top-sources .hover-rect,
-.top-sources .clicked-rect{
+.top-sources .hover-rect, .top-sources .clicked-rect {
   fill: #6854BF;
 }
-
-.top-sources .hover-text,
-.top-sources .clicked-text{
+.top-sources .hover-text, .top-sources .clicked-text {
   fill: #FFFFFF;
 }
-
 .top-sources .source-count {
-	font-family: HelvBoldIBM;
-	font-size: 16px;
+  font-family: HelvBoldIBM;
+  font-size: 16px;
 }
-.top-sources .source-count:hover{
+.top-sources .source-count:hover {
   cursor: pointer;
 }
-
-.top-sources .source-name{
+.top-sources .source-name {
   font-family: HelvLightIBM;
 }
 
 /*Articles and tones*/
 
-.article-list-item{
+.article-list-item {
   padding-top: 30px;
 }
-
-.article-table{
+.article-table {
   margin-top: 20px;
 }
-
-.article-table .article-caption{
- border-bottom: 1px solid;
- font-family: HelvBoldIBM;
+.article-table .article-caption {
+  border-bottom: 1px solid;
+  font-family: HelvBoldIBM;
 }
-
-.article-table .article-cell{
- text-align: left;
- border-bottom: 1px solid;
- padding-top: 20px;
- padding-bottom: 20px;
- font-size: 14px;
- font-family: HelvLightIBM;
+.article-table .article-cell {
+  text-align: left;
+  border-bottom: 1px solid;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  font-size: 14px;
+  font-family: HelvLightIBM;
 }
 
 /*Topics chart*/
 
-.topic-chart .ball-number{
+.topic-chart .ball-number {
   font-size: 11px;
   font-family: HelvBoldIBM;
 }
-
-.topic-chart .stick-text{
+.topic-chart .stick-text {
   font-size: 8px;
   font-family: HelvBoldIBM;
 }
-
-.topic-chart .circle-node:hover{
+.topic-chart .circle-node:hover {
   cursor: pointer;
 }
-
-.topic-chart .circle-counter{
+.topic-chart .circle-counter {
   fill: #FCEE6B;
 }
 
 /*Keywords or topics table*/
 
-.topics-container{
+.topics-container {
+  display: -ms-flexbox;
   display: flex;
+  -ms-flex-flow: column nowrap;
   flex-flow: column nowrap;
   padding-top: 30px;
 }
-
-.topics-container > article{
+.topics-container > article {
+  -ms-flex: 1;
   flex: 1;
 }
-
-.topics-desc-container{
+.topics-desc-container {
   padding-bottom: 30px;
 }
-
-.keywords-table-container{
+.keywords-table-container {
   width: 100%;
   border-collapse: collapse;
 }
-
-.keywords-table-container .keyword-row{
-  text-align:left;
+.keywords-table-container .keyword-row {
+  text-align: left;
   font-family: HelvBoldIBM;
 }
-
-
-.keywords-table-container > thead{
+.keywords-table-container > thead {
   border-bottom: 1pt solid black;
 }
-
-.keywords-table-container > tbody{
+.keywords-table-container > tbody {
   border-bottom: 1pt solid black;
 }
-
-
-
-.keywords-table-container .keyword-heading{
+.keywords-table-container .keyword-heading {
   font-weight: normal;
   font-size: 14px;
   padding-bottom: 10px;
   text-align: left;
   font-weight: HelvLightIBM;
 }
-
-.keywords-table-container .keyword-row > td{
-    cursor: pointer;
+.keywords-table-container .keyword-row > td {
+  cursor: pointer;
 }
-
-.keywords-table-container .data-column-entry{
+.keywords-table-container .data-column-entry {
   padding: 15px;
   font-size: 16px;
 }
-
-.keywords-table-container .sentiment-chart-container{
+.keywords-table-container .sentiment-chart-container {
+  -ms-flex: 1 1 0%;
   flex: 1 1 0%;
   margin: 0 auto;
   margin-bottom: 20px;
 }
-
-
-.keywords-table-container .sentiment-column-positive:before{
+.keywords-table-container .sentiment-column-positive:before {
   content: "\2b";
   font-size: 40px;
   color: #41D6BD;
 }
-
-.keywords-table-container .sentiment-column-negative:before{
+.keywords-table-container .sentiment-column-negative:before {
   content: "\2212";
   font-size: 40px;
   color: #FF7461;
 }
-
-.keywords-table-container .carrot{
+.keywords-table-container .carrot {
   background: url("images/chevron_arrow-01.svg") no-repeat;
   margin-left: 10px;
   width: 18px;
   height: 18px;
-  background-size:contain;
+  background-size: contain;
+}
+.keywords-table-container .carrot-expanded {
+  transform: rotate(180deg);
 }
 
-.keywords-table-container .carrot-expanded{
-     transform: rotate(180deg);
-  }
 /*Sentiment time multi line chart  */
 
-.sentimentTimeLineChart-tooltip{
-    position: absolute;
-    text-align: center;
-    padding-top: 10px;
-    width: 50px;
-    height: 28px;
-    color: white;
-    font-size: 12px;
-    font-family: HelvBoldIBM;
-
-    pointer-events: none;
+.sentimentTimeLineChart-tooltip {
+  position: absolute;
+  text-align: center;
+  padding-top: 10px;
+  width: 50px;
+  height: 28px;
+  color: white;
+  font-size: 12px;
+  font-family: HelvBoldIBM;
+  pointer-events: none;
 }
-
 .sentimentTimeLineChart-tooltip:after {
   display: inline;
   width: 100%;
@@ -541,93 +484,72 @@
   top: 100%;
   left: 0;
 }
-
-.sentimentTimeLineChart-tooltip-positive{
-    background-color: #41D6BD;
+.sentimentTimeLineChart-tooltip-positive {
+  background-color: #41D6BD;
 }
-
-.sentimentTimeLineChart-tooltip-positive:after{
-    color: #41D6BD;
+.sentimentTimeLineChart-tooltip-positive:after {
+  color: #41D6BD;
 }
-
-.sentimentTimeLineChart-tooltip-negative{
-    background-color: #FF7461;
+.sentimentTimeLineChart-tooltip-negative {
+  background-color: #FF7461;
 }
-
-.sentimentTimeLineChart-tooltip-negative:after{
-    color: #FF7461;
+.sentimentTimeLineChart-tooltip-negative:after {
+  color: #FF7461;
 }
-
-
-.sentimentTimeLineChart .axis path,
-.sentimentTimeLineChart .axis line {
+.sentimentTimeLineChart .axis path, .sentimentTimeLineChart .axis line {
   fill: none;
   stroke: grey;
   stroke-width: 1;
   shape-rendering: auto;
 }
-
 .sentimentTimeLineChart .line {
   fill: none;
   stroke-width: 2px;
 }
-
 .sentimentTimeLineChart .line-points {
   fill: #FFFFFF;
   stroke-width: 2px;
 }
-
 .sentimentTimeLineChart .positive {
   stroke: #41D6BD;
 }
-
 .sentimentTimeLineChart .negative {
   stroke: #FF7461;
 }
-
 .sentimentTimeLineChart .legend-text {
   font-size: 10px;
 }
-
-.sentimentTimeLineChart .axis{
+.sentimentTimeLineChart .axis {
   font-family: HelvBoldIBM;
   font-size: 14px;
 }
-
-.sentimentTimeLineChart .y-axis-label{
+.sentimentTimeLineChart .y-axis-label {
   font-family: HelvLightIBM;
   font-size: 14px;
 }
-
-.footer-section{
+.footer-section {
   background-color: #6854BF;
   color: #FFFFFF;
-  padding: 10px 0 10px 0;
+  padding: 10px 0px 10px 0px;
 }
-
-.footer-section > a{
+.footer-section > a {
   color: inherit;
   text-decoration: none;
   font-size: 0.8em;
 }
-
-@media only screen and (max-width: 960px){
-
-  .header-container{
+@media only screen and (max-width: 960px) {
+  .header-container {
     position: relative;
   }
-
-  .main-container{
-    margin-top: 0;
+  .main-container {
+    margin-top: 0px;
   }
-
-  .fixed-date-container{
+  .fixed-date-container {
     background-color: inherit;
     position: inherit;
-    top: 0;
-    left: 0;
-    right: 0;
-    padding: 0;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    padding: 0px;
   }
-
 }
