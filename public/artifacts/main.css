@@ -179,6 +179,9 @@ svg {
   background-color: transparent;
   color: inherit;
 }
+.entity-input::-webkit-input-placeholder {
+  color: #ddd;
+}
 .welcome-search-field {
   position: relative;
   border-color: #FFFFFF;
