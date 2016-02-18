@@ -1,4 +1,5 @@
 (function(app) {
+  'use strict';
   app.SentimentBalls = function(dom, args) {
     this.domNode = dom;
 
@@ -25,9 +26,8 @@
         bottom: 0
       },
       width = svgWidth - margin.right - margin.left,
-      height = svgHeight - margin.top - margin.bottom,
-      noOfBalls = 10,
-      ballSpace = 100;
+      //height = svgHeight - margin.top - margin.bottom,
+      noOfBalls = 10;
 
 
     //variables for data
@@ -57,15 +57,11 @@
 
     app.widgetUtil.addGradients(this._svg, colorData.gradients);
 
-    var xScale = d3.scale.linear()
-      .range([0, width])
-      .domain([0, ballsArr.length]);
 
     var spacePerCircleBox = Math.floor(width / noOfBalls);
     var spacePerCircle = Math.floor(spacePerCircleBox / 2);
     var circleRadius = Math.floor(spacePerCircle / 2);
 
-    var rectWidth = (width / 3) - 30;
 
 
     this._svg.selectAll('circle')
@@ -82,7 +78,8 @@
 
     //Plus and negative symbols
     var plusG = this._svg.append('g')
-      .attr('transform', 'translate(' + (width - (circleRadius * 3)) + ',' + (spacePerCircleBox) + ')')
+      .attr('transform', 'translate(' +
+        (width - (circleRadius * 3)) + ',' + (spacePerCircleBox) + ')')
       .attr('fill', app.widgetUtil.SENTIMENT_COLOR_MAP.positive);
 
     var plusSize = spacePerCircle;
@@ -123,7 +120,7 @@
       .attr('x', symbolSpace)
       .attr('y', yText)
       .attr('dy', '.50em')
-      .text(function(d) {
+      .text(function() {
         return negPercent + '%';
       });
 
@@ -144,7 +141,7 @@
       .attr('x', width - (symbolSpace + rightExtraSpace))
       .attr('y', yText)
       .attr('dy', '.50em')
-      .text(function(d) {
+      .text(function() {
         return posPercent + '%';
       });
 

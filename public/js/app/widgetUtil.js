@@ -1,6 +1,5 @@
 (function(app) {
-
-
+  'use strict';
   app.widgetUtil = {
     MILLIS_IN_DAY: 24 * 3600 * 1000,
     TODAYS_DATE_LABEL: 'today'
@@ -35,7 +34,8 @@
     };
   };
 
-  app.widgetUtil._processSectionSpace = function(normalizedData, currentDataArr, remainingSectionSpace) {
+  app.widgetUtil._processSectionSpace =
+  function(normalizedData, currentDataArr, remainingSectionSpace) {
     var entrySpace = 0,
       entry = normalizedData[0];
     if (entry.value > remainingSectionSpace) {
@@ -72,7 +72,7 @@
         value: start
       });
     });
-    var gradientIndex = app.widgetUtil.GRADIENT_PREFIX + "_" + app.widgetUtil._gradientCount++;
+    var gradientIndex = app.widgetUtil.GRADIENT_PREFIX + '_' + app.widgetUtil._gradientCount++;
     gradientData.push({
       id: gradientIndex,
       gradients: gradients
@@ -82,15 +82,17 @@
     });
   };
 
-  app.widgetUtil._fillupSectionedColorData = function(normalizedData, colorData, gradientData, colorMap) {
+  app.widgetUtil._fillupSectionedColorData =
+  function(normalizedData, colorData, gradientData, colorMap) {
     var currentDataArr = [];
 
     var remainingSectionSpace = app.widgetUtil.PERCENT_MULTIPLIER;
     while (normalizedData.length &&
       remainingSectionSpace > 0) {
-      remainingSectionSpace = this._processSectionSpace(normalizedData, currentDataArr, remainingSectionSpace);
+      remainingSectionSpace = this._processSectionSpace(
+        normalizedData, currentDataArr, remainingSectionSpace);
     }
-    if (currentDataArr.length == 1) {
+    if (currentDataArr.length === 1) {
       colorData.push({
         color: colorMap[currentDataArr[0].id]
       });
@@ -99,7 +101,8 @@
     }
   };
 
-  app.widgetUtil.generateSectionedColorData = function(slices, noOfSections, colorMap, gradientPrefix) {
+  app.widgetUtil.generateSectionedColorData =
+  function(slices, noOfSections, colorMap, gradientPrefix) {
     //Normalize the data into sectioned parts of 100
     var total = slices.reduce(function(previousValue, slice) {
       return previousValue + slice.value;
@@ -113,7 +116,8 @@
     });
     var colorData = [], gradientData = [];
     for (var count = 0; count < noOfSections; count++) {
-      this._fillupSectionedColorData(normalizedData, colorData, gradientData, colorMap, gradientPrefix);
+      this._fillupSectionedColorData(
+        normalizedData, colorData, gradientData, colorMap, gradientPrefix);
     }
 
     return {colors: colorData, gradients: gradientData};
