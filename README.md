@@ -153,7 +153,7 @@ The sample application is made up of two major components:
 * NodeJS application - This application acts as a proxy between the web-based dashboard and the Alchemy services
 * Web-basd dashboard - This dashboard helps you understand how the public feels about a company.
 
-<img src="doc/pattern.tiff" style="width:50%;">
+<img src="doc/pattern.png" style="width:50%;">
 
 The Node JS application exposes the following endpoints for the dashboard:
 * /api/sentiments - this endpoint is used to determine the overall sentiment for a company
