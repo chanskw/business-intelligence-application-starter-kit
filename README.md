@@ -184,7 +184,7 @@ To get the tone of one of the articles found, the application uses the Alchemy L
 
 ### Best practices
 
-**PLACEHOLDER**
+* **Use the relevance parameter** - When searching for articles related to an entity or keyword from the AlchemyData News API, use the *relevance* parameter to improve the accuracy of the search.  If this parameter is not specified, any article that mentions the provided entity or keyword will be returned.  In some cases, the article may actully be not very relevant.  Use this parameter to help find articles that are truly relevant to what you are looking for.
 
 ## Reference information
 The following links provide more information about the AlchemyData News, Alchemy Language, and Tone Analyzer services, including tutorials on using those services:
