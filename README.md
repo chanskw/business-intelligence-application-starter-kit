@@ -147,12 +147,22 @@ Follow the steps in the [previous section](#getting-started) and ensure that you
 
 ## About the Business Intelligence pattern
 
-The Business Intelligence Pattern is made up of two major components:
+This sample application demonstrates how use natural language processing to understand important topics and how people feel about those topics.  This application uses AlchemyData News, AlchemyLanguage and Tone Analyzer APIs.
+
+The sample application is made up of two major components:
+* NodeJS application - This application acts as a proxy between the web-based dashboard and the Alchemy services
+* Web-basd dashboard - This dashboard helps you understand how the public feels about a company.
+
 <img src="doc/pattern.tiff" style="width:50%;">
 
+The Node JS application exposes the following endpoints for the dashboard:
+* /api/sentiments - this endpoint is used to determine the overall sentiment for a company
+* /api/keywords - this endpoint is used to determine the top concepts related to the company
+* /api/sources - this endpoint is used to determine the top news sources for the company
+* /api/articles - this endpoint is used to retrieve a list of articles from one of the top sources
+* /api/tone - this endpoint is used to send the content of an article (specified by an url) to the Alchemy Tone Analyzer
 
-
-**PLACEHOLDER**
+When one of these endpoints are called, based on the query parameters provided, the Node JS application tranlates the requests to appropriate queries to the Alchemy services.  When a response is received, the application will relay the responses back to the web-based dashboard.
 
 ### When to use this pattern
 
