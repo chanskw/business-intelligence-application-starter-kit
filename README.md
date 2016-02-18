@@ -168,11 +168,15 @@ To get the overall sentiment, top keywords, news sources and a list of articles 
 
 If you are interested in articles related to other entity type, e.g. technology, product, you can modify the application to search for a different entity type.  Modify the *entityQuery* function in `app.js`:
 
-`function entityQuery(entity) {
+```js
+function entityQuery(entity) {
   return '\|text=' + entity + ',type=company,relevance=>0.25\|';
-}`
+}
+```
 
 For a full list of supported entity types, refer to documentation [here](http://www.alchemyapi.com/api/entity/types).
+
+To get the tone of one of the articles found, the application uses the Alchemy Language and the Tone Analyzer API.   From the AlchemyData News API, the applciation retrieves the URL of an article related to the company.  The application then sends this URL to the Alchemy Language Text Extract API to get the text content of the article.  It then passes the article content to the Tone Anayzer.
 
 ### When to use this pattern
 
