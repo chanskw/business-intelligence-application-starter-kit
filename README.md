@@ -180,12 +180,13 @@ To get the tone of one of the articles found, the application uses the Alchemy L
 
 ### When to use this pattern
 
-**PLACEHOLDER**
+* You want to analyze news articles from a vast number of news sources.
+* You want to understand how certain entities are perceived by the public from these news data sources.
 
 ### Best practices
 
 * **Use the relevance parameter** - When searching for articles related to an entity or keyword from the AlchemyData News API, use the *relevance* parameter to improve the accuracy of the search.  If this parameter is not specified, any article that mentions the provided entity or keyword will be returned.  In some cases, the article may actully be not very relevant.  Use this parameter to help find articles that are truly relevant to what you are looking for.
-*  **Be specific about what AlchemyData News should return** - When constructing a query for the AlchemyDataNews, you can specify the *return* parameter to control what the query should return.  For example, you may ask the service to simply return a list of *keywords*, which include all keywords found.  For each keyword, all attributes associated with the keyword object will also be returned.  This can result in a large amount of data to be transferred between the AlchemyData News service and the Node JS application, and can result in performance problem in your application.  To improve performance, only specify the minimum set of attributes required by your application to reduce the data transfer cost.  
+*  **Be specific about what AlchemyData News should return** - When constructing a query for the AlchemyDataNews, you can specify the *return* parameter to control what the query should return.  For example, you may ask the service to simply return a list of *keywords*, which include all keywords found.  For each keyword, all attributes associated with the keyword object will also be returned.  This can result in a large amount of data to be transferred between the AlchemyData News service and the Node JS application, and can result in performance problem in your application.  To improve performance, only specify the minimum set of attributes required by your application to reduce the data transfer cost.
 
 ## Reference information
 The following links provide more information about the AlchemyData News, Alchemy Language, and Tone Analyzer services, including tutorials on using those services:
