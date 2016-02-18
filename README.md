@@ -164,13 +164,29 @@ The Node JS application exposes the following endpoints for the dashboard:
 
 When one of these endpoints are called, based on the query parameters provided, the Node JS application tranlates the requests to appropriate queries to the Alchemy services.  When a response is received, the application will relay the responses back to the web-based dashboard.
 
+To get the overall sentiment, top keywords, news sources and a list of articles related to the company, the application makes use of the AlchemyData News API.  This API allows us to query for news articles from a diverse list of data sources from the last 60 days.  In this application, the queries are designed to search for articles related to the *company* entity type.  
+
+If you are interested in articles related to other entity type, e.g. technology, product, you can modify the application to search for a different entity type.  Modify the *entityQuery* function in `app.js`:
+
+```js
+function entityQuery(entity) {
+  return '\|text=' + entity + ',type=company,relevance=>0.25\|';
+}
+```
+
+For a full list of supported entity types, refer to documentation [here](http://www.alchemyapi.com/api/entity/types).
+
+To get the tone of one of the articles found, the application uses the Alchemy Language and the Tone Analyzer API.   From the AlchemyData News API, the applciation retrieves the URL of an article related to the company.  The application then sends this URL to the Alchemy Language Text Extract API to get the text content of the article.  It then passes the article content to the Tone Anayzer.
+
 ### When to use this pattern
 
-**PLACEHOLDER**
+* You want to analyze news articles from a vast number of news sources.
+* You want to understand how certain entities are perceived by the public from these news data sources.
 
 ### Best practices
 
-**PLACEHOLDER**
+* **Use the relevance parameter** - When searching for articles related to an entity or keyword from the AlchemyData News API, use the *relevance* parameter to improve the accuracy of the search.  If this parameter is not specified, any article that mentions the provided entity or keyword will be returned.  In some cases, the article may actully be not very relevant.  Use this parameter to help find articles that are truly relevant to what you are looking for.
+*  **Be specific about what AlchemyData News should return** - When constructing a query for the AlchemyDataNews, you can specify the *return* parameter to control what the query should return.  For example, you may ask the service to simply return a list of *keywords*, which include all keywords found.  For each keyword, all attributes associated with the keyword object will also be returned.  This can result in a large amount of data to be transferred between the AlchemyData News service and the Node JS application, and can result in performance problem in your application.  To improve performance, only specify the minimum set of attributes required by your application to reduce the data transfer cost.
 
 ## Reference information
 The following links provide more information about the AlchemyData News, Alchemy Language, and Tone Analyzer services, including tutorials on using those services:
