@@ -164,6 +164,16 @@ The Node JS application exposes the following endpoints for the dashboard:
 
 When one of these endpoints are called, based on the query parameters provided, the Node JS application tranlates the requests to appropriate queries to the Alchemy services.  When a response is received, the application will relay the responses back to the web-based dashboard.
 
+To get the overall sentiment, top keywords, news sources and a list of articles related to the company, the application makes use of the AlchemyData News API.  This API allows us to query for news articles from a diverse list of data sources from the last 60 days.  In this application, the queries are designed to search for articles related to the *company* entity type.  
+
+If you are interested in articles related to other entity type, e.g. technology, product, you can modify the application to search for a different entity type.  Modify the *entityQuery* function in `app.js`:
+
+`function entityQuery(entity) {
+  return '\|text=' + entity + ',type=company,relevance=>0.25\|';
+}`
+
+For a full list of supported entity types, refer to documentation [here](http://www.alchemyapi.com/api/entity/types).
+
 ### When to use this pattern
 
 **PLACEHOLDER**
