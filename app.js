@@ -23,6 +23,14 @@ var express = require('express'),
   watson    = require('watson-developer-cloud'),
   Q         = require('q');
 
+
+try {
+  // load environment variables when running locally
+  extend(process.env, require('./.env.js'));
+} catch(ex) {
+  console.log('no .env.js found, skipping');
+}
+
 // Bootstrap application settings
 require('./config/express')(app);
 
