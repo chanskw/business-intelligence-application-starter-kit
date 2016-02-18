@@ -130,6 +130,18 @@ svg {
   position: absolute;
 }
 
+.loader-fallback {
+  display: none;
+  width: 160px;
+}
+
+.ie .loader-fallback {
+  display: inline;
+}
+.ie .loader-main {
+  display: none;
+}
+
 /*Welcome page*/
 
 .welcome-flex {
