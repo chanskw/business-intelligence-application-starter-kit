@@ -24,7 +24,7 @@ This application requires an AlchemyAPI key with high transaction limits. The fr
 
 ## How this app works
 
-This application provides a query interface that lets users search for information about a company and how it is publicly perceived. The query interface uses the semantic information available from AlchemyAPI to limit search results to company-related information.
+This application provides a web interface to search for information about a company and its publicly perception. The query interface uses the semantic information available from AlchemyAPI to limit search results to company-related information.
 
 AlchemyData News provides extensive access to news sources, which are then analyzed by the Tone Analyzer service to show how the company is perceived. In addition, the overall customer sentiment about the company is displayed, as well as sentiment information about the top 10 related concepts.
 
@@ -33,7 +33,7 @@ The application is written in [Node.js](http://nodejs.org/) and uses [npm](https
 
 **Important:** If you used the `Deploy to Bluemix` button to deploy an instance of this application to Bluemix automatically, you will have to delete that application and the services that it used before you can build and deploy an application manually. You can use the `cf apps` command to see the instances of running applications, use the `cf delete application-name` command to delete the application, and use the `cf delete-services service--name` command to delete each of applications.
 
-The following instructions explain how to [fork the project on GitHub](https://github.com/germanattanasio/business-intelligence#fork-destination-box) and push that fork to Bluemix using the `cf` command-line interface (CLI) for Cloud Foundry. If you want to run the application locally, see the next section, [Running the application locally](#running-the-application-locally):
+The following instructions explain how to fork the project on GitHub and push that fork to Bluemix using the `cf` command-line interface (CLI) for Cloud Foundry. If you want to run the application locally, see the next section, [Running the application locally](#running-the-application-locally):
 
   1. Log into GitHub and fork the project repository. Clone your fork to a folder on your local system and change to that folder.
 
@@ -50,16 +50,23 @@ The following instructions explain how to [fork the project on GitHub](https://g
 
      `var alchemyApiKey = { api_key: process.env.ALCHEMY_API_KEY || '<your api key>'};`
 
-  7. Edit the `manifest.yml` file in the folder that contains your fork and replace `application-name` with a unique name for your copy of the application. The name that you specify determines the application's URL, such as `application-name.mybluemix.net`.
+  7. Edit the `manifest.yml` file in the folder that contains your fork and replace `business-intelligence` with a unique name for your copy of the application. The name that you specify determines the application's URL, such as `application-name.mybluemix.net`.
 
     ```yml
-    applications:
-      - services:
-        - tone-analyzer-service
-      name: application-name
-      path: .
-      memory: 512M
-      disk_quota: 512M
+declared-services:
+  tone-analyzer-service:
+    label: tone_analyzer
+    plan: beta
+applications:
+- name: business-intelligence
+  command: npm start
+  path: .
+  memory: 512M
+  services:
+  - tone-analyzer-service
+  env:
+    NODE_ENV: production
+    SECURE_EXPRESS: 1
     ```
   6. Connect to Bluemix by running the following commands in a terminal window:
 
@@ -90,35 +97,11 @@ Follow the steps in the [previous section](#getting-started) and ensure that you
     ```sh
     $ npm install
     ```
-
-  2. Open app.js file, and specify the API key here:
-
-     `var alchemyApiKey = { api_key: process.env.ALCHEMY_API_KEY || '<your api key>'};`
-
-  3. Create a `.env.js` file in the root directory of the project with the following content:
-
-      ```js
-      'use strict';
-
-      module.exports = {
-        VCAP_SERVICES: JSON.stringify({
-          tone_analyzer: [{
-            credentials: {
-              url: 'https://gateway.watsonplatform.net/tone-analyzer-beta/api',
-              username: 'TONE ANALYZER USERNAME HERE',
-              password: 'TONE ANALYZER PASSWORD HERE'
-            }
-          }],
-
-        VCAP_APP_PORT: 3000
-      })};
-      ```
-
-  4. Copy the `username`, `password`, and `url` credentials from your `tone-analyzer-service` service in Bluemix to the previous file. To see the service credentials for your Tone Analyzer service instance, run the following command, replacing `<application-name>` with the name of the application that you specified in your `manifest.yml` file:
+  2. Make note of the `username`, `password`, and `url` credentials from your `tone-analyzer-service` service in Bluemix. To see the service credentials for your Tone Analyzer service instance, run the following command, replacing `<application-name>` with the name of the application that you specified in your `manifest.yml` file:
     ```sh
     $ cf env <application-name>
     ```
-  Your output should contain a section like the following:
+  The output should contain a section similar to the following:
     ```sh
     System-Provided:
     {
@@ -137,21 +120,41 @@ Follow the steps in the [previous section](#getting-started) and ensure that you
     }
     ```
 
-  5. Start the application by running:
+  3. Create a `.env.js` file in the root directory of the project with the following content, filling in the credentials with the information from the previous step:
+
+      ```js
+      'use strict';
+
+      module.exports = {
+        VCAP_SERVICES: JSON.stringify({
+          tone_analyzer: [{
+            credentials: {
+              url: 'https://gateway.watsonplatform.net/tone-analyzer-beta/api',
+              username: 'TONE ANALYZER USERNAME HERE',
+              password: 'TONE ANALYZER PASSWORD HERE'
+            }
+          }],
+
+        VCAP_APP_PORT: 3000
+      })};
+      ```
+
+
+  4. Start the application by running:
 
     ```sh
     $ node app.js
     ```
 
-  6. Open [http://localhost:6001](http://localhost:6001) to see the running application.
+  5. Open [http://localhost:6001](http://localhost:6001) to see the running application.
 
 ## About the Business Intelligence pattern
 
-This sample application demonstrates how use natural language processing to understand important topics and how people feel about those topics.  This application uses AlchemyData News, AlchemyLanguage and Tone Analyzer APIs.
+This sample application demonstrates how to use natural language processing to understand popular sentiment about a topic using AlchemyData News, AlchemyLanguage and Tone Analyzer APIs.
 
 The sample application is made up of two major components:
-* NodeJS application - This application acts as a proxy between the web-based dashboard and the Alchemy services
-* Web-basd dashboard - This dashboard helps you understand how the public feels about a company.
+* NodeJS server - This application acts as a proxy between the web-based dashboard and the Alchemy services
+* Web-based dashboard client - This dashboard helps you understand how the public feels about a company.
 
 <img src="doc/pattern.png" style="width:50%;">
 
@@ -162,11 +165,11 @@ The Node JS application exposes the following endpoints for the dashboard:
 * /api/articles - this endpoint is used to retrieve a list of articles from one of the top sources
 * /api/tone - this endpoint is used to send the content of an article (specified by an url) to the Alchemy Tone Analyzer
 
-When one of these endpoints are called, based on the query parameters provided, the Node JS application tranlates the requests to appropriate queries to the Alchemy services.  When a response is received, the application will relay the responses back to the web-based dashboard.
+When one of these endpoints is called, based on the query parameters provided, the server tranlates the request into appropriate queries for the Alchemy services.  When the server receives a response, it relays the responses back to the web-based dashboard.
 
-To get the overall sentiment, top keywords, news sources and a list of articles related to the company, the application makes use of the AlchemyData News API.  This API allows us to query for news articles from a diverse list of data sources from the last 60 days.  In this application, the queries are designed to search for articles related to the *company* entity type.  
+The application makes use of the AlchemyData News API to get the overall sentiment, top keywords, news sources, and a list of articles related to the company. This API allows us to query for news articles from a diverse list of data sources from the last 60 days.  In this application, the queries are designed to search for articles related to the *company* entity type.  
 
-If you are interested in articles related to other entity type, e.g. technology, product, you can modify the application to search for a different entity type.  Modify the *entityQuery* function in `app.js`:
+If you are interested in articles related to other entity types, e.g. technology, product, you can modify the application to search for a different entity type.  Modify the *entityQuery* function in `app.js`:
 
 ```js
 function entityQuery(entity) {
@@ -176,7 +179,7 @@ function entityQuery(entity) {
 
 For a full list of supported entity types, refer to documentation [here](http://www.alchemyapi.com/api/entity/types).
 
-To get the tone of one of the articles found, the application uses the Alchemy Language and the Tone Analyzer API.   From the AlchemyData News API, the applciation retrieves the URL of an article related to the company.  The application then sends this URL to the Alchemy Language Text Extract API to get the text content of the article.  It then passes the article content to the Tone Anayzer.
+To get the tone of one of the articles found, the server uses the Alchemy Language and the Tone Analyzer API: from the AlchemyData News API, the server retrieves the URL of an article related to the company; The server then sends this URL to the Alchemy Language Text Extract API to get the text content of the article; finally, it passes the article content to the Tone Anayzer API.
 
 ### When to use this pattern
 
@@ -185,8 +188,8 @@ To get the tone of one of the articles found, the application uses the Alchemy L
 
 ### Best practices
 
-* **Use the relevance parameter** - When searching for articles related to an entity or keyword from the AlchemyData News API, use the *relevance* parameter to improve the accuracy of the search.  If this parameter is not specified, any article that mentions the provided entity or keyword will be returned.  In some cases, the article may actully be not very relevant.  Use this parameter to help find articles that are truly relevant to what you are looking for.
-*  **Be specific about what AlchemyData News should return** - When constructing a query for the AlchemyDataNews, you can specify the *return* parameter to control what the query should return.  For example, you may ask the service to simply return a list of *keywords*, which include all keywords found.  For each keyword, all attributes associated with the keyword object will also be returned.  This can result in a large amount of data to be transferred between the AlchemyData News service and the Node JS application, and can result in performance problem in your application.  To improve performance, only specify the minimum set of attributes required by your application to reduce the data transfer cost.
+* **Use the relevance parameter** - When searching for articles related to an entity or keyword from the AlchemyData News API, use the *relevance* parameter to improve the accuracy of the search.  If this parameter is not specified, any article that mentions the provided entity or keyword will be returned.  Thus, in some cases, the article may actually be not very relevant.  Use this parameter to help find articles that are truly relevant to what you are looking for.
+*  **Be specific about what AlchemyData News should return** - When constructing a query for the AlchemyData News API, you can specify the *return* parameter to control what the query should return.  For example, you may ask the service to simply return a list of *keywords*, which include all keywords found.  For each keyword, all attributes associated with the keyword object will also be returned.  This can result in a large amount of data to be transferred between the AlchemyData News service and the Node JS server, and can result in performance problem in your application.  To improve performance, only specify the minimum set of attributes required by your application to reduce the data transfer cost.
 
 ## Reference information
 The following links provide more information about the AlchemyData News, Alchemy Language, and Tone Analyzer services, including tutorials on using those services:
@@ -202,7 +205,7 @@ The following links provide more information about the AlchemyData News, Alchemy
 
 ## User interface in this sample application
 
-The user interface that this sample application provides is intended as an example, and is not proposed as the user interface for your applications. However, if you want to use this user interface, you will want to modify the following files:
+The user interface that this sample application provides is intended as an example; it is not proposed as the user interface for your application. However, if you want to use this user interface, modify the following files:
 
 * `public/index.html` - Defines the items that are displayed in the footer for the sample application. By default, the items in the footer are placeholders for IBM-specific values because they are used in the running instance of this sample application. For example, the Terms and Conditions do not apply to your use of the source code, to which the [Apache license](#license) applies.
 * `public/artifacts/main.css` - Defines the graphics that are used at various places in the sample application
